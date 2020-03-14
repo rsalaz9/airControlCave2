@@ -1,0 +1,6 @@
+Schedule and deriverables:
+* Finish Cave2 tutorial – Sunday by 11pm (estimated 4 hours)
+* Search for Unity scene merging options – Mon by 11 pm (estimated 2 hours)
+* Search for Unity predetermined paths options – Mon by 11 pm (estimated 2 hours)
+* Search for outside & tower control prefabs for the first milestone – Mon by 11pm (estimated 1 hour)
+* Add elements into scene and create menu buttons, create menu, add at least 1 sound (for example on plane movement) – by Tue 11pm (estimated 6 hours)
