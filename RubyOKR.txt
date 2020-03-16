@@ -1,0 +1,5 @@
+Schedule and deriverables:
+* Finish Cave2 tutorial – Sunday by 11pm (estimated 4 hours)
+* Search for Unity predetermined paths options – Mon by 11 pm (estimated 2 hours)
+* Plane selection and menu options – by Tue 11pm (estimated 6 hours)
+* Plane ground movement - by Tue 11pm (estimated 6 hours)
