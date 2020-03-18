@@ -1,0 +1,5 @@
+Schedule and deliverables: 
+* Finish Cave2 Tutorial -Sunday by 11 pm (estimated 4 hours)
+* Make a test prototype using Cave2 tutorial - Monday by 11 pm (estimated 2 hours)
+* Manipulating controls of the planes (i.e. selecting a option for a plane and respond to that) - Tuesday 11 pm (estimated 6 hours)
+* Work on Terrain for the game environment - Tuesday 11 pm (estimated 3 hours)
