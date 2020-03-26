@@ -12,7 +12,7 @@ public class PathGenerateAuto : MonoBehaviour
 
     //boolean to make sure update runs once only
     bool PushpathGen = true; 
-    bool TerminalpathGen = true;
+    bool TerminalpathGen = false;
 
     // Update is called once per frame
     void Update()
@@ -54,5 +54,17 @@ public class PathGenerateAuto : MonoBehaviour
         // else{ 
         //     current = (current + 1) % target.Length;
         // }
+
+    public void PushToggleButton(){
+        PushpathGen = !PushpathGen;
+        // TerminalpathGen = !TerminalpathGen;
+        print(PushpathGen);
+    }
+
+    public void TerminalToggleButton(){
+        TerminalpathGen = !TerminalpathGen;
+        // TerminalpathGen = !TerminalpathGen;
+        print(TerminalpathGen);
+    }
         
 }
