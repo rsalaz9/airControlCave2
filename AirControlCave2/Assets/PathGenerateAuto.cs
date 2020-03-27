@@ -14,6 +14,7 @@ public class PathGenerateAuto : MonoBehaviour
     bool PushpathGen = true; 
     bool TerminalpathGen = false;
 
+
     // Update is called once per frame
     void Update()
     {
@@ -66,5 +67,6 @@ public class PathGenerateAuto : MonoBehaviour
         // TerminalpathGen = !TerminalpathGen;
         print(TerminalpathGen);
     }
+
         
 }
