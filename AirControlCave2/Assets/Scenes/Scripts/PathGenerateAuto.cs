@@ -54,6 +54,8 @@ public class PathGenerateAuto : MonoBehaviour
                     Vector3 pos =  Vector3.MoveTowards(transform.position, target[current].position, speed * Time.deltaTime);
                     GetComponent<Rigidbody>().MovePosition(pos);
                 }else if(transform.position == target[current].position){
+                    //let's rotate the object
+                    transform.Rotate(0, 90, 0);
                     // checkTargetVariable();
                     PushpathGen = false;
                     push = false;
@@ -77,6 +79,8 @@ public class PathGenerateAuto : MonoBehaviour
                 Vector3 pos =  Vector3.MoveTowards(transform.position, target[current].position, speed * Time.deltaTime);
                 GetComponent<Rigidbody>().MovePosition(pos);
             }else if(transform.position == target[current].position){
+                //rotate again
+                transform.Rotate(0, 90, 0);
                 taxiPath = false;
                 taxi = false;
             }
@@ -100,6 +104,8 @@ public class PathGenerateAuto : MonoBehaviour
                 Vector3 pos =  Vector3.MoveTowards(transform.position, target[current].position, speed * Time.deltaTime);
                 GetComponent<Rigidbody>().MovePosition(pos);
             }else if(transform.position == target[current].position){
+                //rotate again
+                transform.Rotate(0, 90, 0);
                 TerminalpathGen = false;
             }
 
