@@ -59,7 +59,8 @@ public class CAVE2PlayerCollider : MonoBehaviour {
             rigidbody = bodyCollider.gameObject.AddComponent<Rigidbody>();
         }
         rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-
+        // rigidbody.useGravity = true;
+        // print(rigidbody.useGravity);
         // Ignore collisions between body and any listed child coliders
         // as well as between child colliders
         Collider lastCollider = bodyCollider;
