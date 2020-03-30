@@ -29,7 +29,8 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-public class OMenu : MonoBehaviour {
+
+public class PlaneMenu : MonoBehaviour {
 
     public Selectable[] menuItems;
     public int currentItem = 0;
@@ -41,9 +42,9 @@ public class OMenu : MonoBehaviour {
     float currentScale;
     public float showMenuSpeed = 5;
 
-    public OMenuManager menuManager;
+    public PlaneMenuManager menuManager;
     public bool activeMenu = false;
-    public OMenu previousMenu;
+    public PlaneMenu previousMenu;
 
     public float menuProgress;
 
@@ -52,12 +53,13 @@ public class OMenu : MonoBehaviour {
     // Use this for initialization
     void Start () {
         maxScale = transform.localScale.x;
-        menuManager = GetComponentInParent<OMenuManager>();
+        menuManager = GetComponentInParent<PlaneMenuManager>();
         pointerData = new PointerEventData(EventSystem.current);
 
         if(menuItems.Length > 0)
+        {
             menuItems[currentItem].OnSelect(pointerData);
-
+        }
         if(!showMenu)
         {
             transform.localScale = Vector3.zero;
@@ -145,11 +147,8 @@ public class OMenu : MonoBehaviour {
 
         if(CAVE2.Input.GetButtonDown(menuManager.menuWandID, menuManager.selectButton))
         {
+            CAVE2.SendMessage(gameObject.name, "CloseMenu");
             CAVE2.SendMessage(gameObject.name, "MenuSelectItem");
-        }
-        if (CAVE2.Input.GetButtonDown(menuManager.menuWandID, menuManager.menuBackButton))
-        {
-            CAVE2.SendMessage(gameObject.name, "ToggleMenu");
         }
 
         if (CAVE2.Input.GetButtonDown(menuManager.menuWandID, CAVE2.Button.ButtonLeft))
@@ -179,6 +178,46 @@ public class OMenu : MonoBehaviour {
             transform.localScale = Vector3.zero;
             menuProgress = 0;
             activeMenu = false;
+        }
+    }
+
+    public void OpenMenu()
+    {
+       showMenu = true;
+
+        if( showMenu )
+        {
+            if(menuManager.mainMenu != this )
+                previousMenu = menuManager.currentMenu;
+
+            menuManager.currentMenu = this;
+
+            activeMenu = true;
+
+            if (previousMenu)
+            {
+                previousMenu.showMenu = false;
+                transform.position = previousMenu.transform.position;
+            }
+
+            menuManager.openMenus++;
+            menuManager.PlayOpenMenuSound();
+        }
+    }
+
+     public void CloseMenu()
+    {
+        showMenu = false;
+        if( !showMenu )
+        {
+            if(previousMenu)
+            {
+                previousMenu.showMenu = true;
+                menuManager.currentMenu = previousMenu;
+            }
+            activeMenu = false;
+            menuManager.openMenus--;
+            menuManager.PlayCloseMenuSound();
         }
     }
 
@@ -271,10 +310,6 @@ public class OMenu : MonoBehaviour {
         if (menuItems[currentItem].GetType() == typeof(Button))
         {
             ((Button)menuItems[currentItem]).OnPointerClick(pointerData);
-        }
-        else if (menuItems[currentItem].GetType() == typeof(Toggle))
-        {
-            ((Toggle)menuItems[currentItem]).OnPointerClick(pointerData);
         }
         menuManager.PlaySelectMenuSound();
     }

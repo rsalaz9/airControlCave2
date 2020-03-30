@@ -28,12 +28,12 @@
  using UnityEngine;
 using System.Collections;
 
-public class OMenuManager : MonoBehaviour {
+public class PlaneMenuManager : MonoBehaviour {
 
     public int menuWandID = 1;
 
-    public OMenu mainMenu;
-    public OMenu currentMenu;
+    public PlaneMenu mainMenu;
+    public PlaneMenu currentMenu;
 
     public int openMenus;
 
@@ -45,8 +45,8 @@ public class OMenuManager : MonoBehaviour {
     public Vector3 distOffset = Vector3.forward;
 
     // CAVE2 Omegalib-style
-    public CAVE2.Button menuOpenButton = CAVE2.Button.Button2;
-    public CAVE2.Button menuBackButton = CAVE2.Button.Button3;
+    // public CAVE2.Button menuOpenButton = CAVE2.Button.Button2;
+    //public CAVE2.Button menuBackButton = CAVE2.Button.Button3;
     public CAVE2.Button selectButton = CAVE2.Button.Button2;
 
     [SerializeField]
@@ -55,7 +55,7 @@ public class OMenuManager : MonoBehaviour {
     [SerializeField]
     AudioClip closeMenuSound;
 
-    [SerializeField]
+    [SerializeField] 
     AudioClip selectMenuSound;
 
     [SerializeField]
@@ -63,8 +63,16 @@ public class OMenuManager : MonoBehaviour {
 
     AudioSource audioSource;
 
+    private bool objectGrabbed;
+    private SelectObject c;
+
     // Use this for initialization
     void Start () {
+        c = GetComponentInParent<SelectObject>();
+        if (c != null)
+        {
+        objectGrabbed = c.grabbed;
+        }
         currentMenu = mainMenu;
         audioSource = GetComponent<AudioSource>();
         if(audioSource == null)
@@ -78,21 +86,28 @@ public class OMenuManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (currentMenu == mainMenu && currentMenu.activeMenu == false)
-
-        if (CAVE2.Input.GetButtonDown(menuWandID, menuOpenButton))
+        if (c != null)
         {
-           if(CAVE2.IsMaster())
-           {
-                angleOffset = new Vector3(0, CAVE2.Input.GetWandRotation(menuWandID).eulerAngles.y, 0);
-                CAVE2.SendMessage(gameObject.name, "SetWandAngle", angleOffset);
-                CAVE2.SendMessage(mainMenu.name, "ToggleMenu");
-           }
+        objectGrabbed = c.grabbed;
         }
+
+        if (currentMenu == mainMenu && currentMenu.activeMenu == false)
 
         CAVE2.Input.SetWandMenuLock(menuWandID, openMenus > 0);
     }
 
+    public void OpenMenuManager()
+    {
+        angleOffset = new Vector3(0, CAVE2.Input.GetWandRotation(menuWandID).eulerAngles.y, 0);
+        CAVE2.SendMessage(gameObject.name, "SetWandAngle", angleOffset);
+        CAVE2.SendMessage(mainMenu.name, "OpenMenu");
+    }
+
+    public void CloseMenuManager()
+    {
+        CAVE2.SendMessage(mainMenu.name, "CloseMenu");
+    }
+    
     public void PlayOpenMenuSound()
     {
         audioSource.clip = openMenuSound;
@@ -121,14 +136,8 @@ public class OMenuManager : MonoBehaviour {
     {
         if (followWand)
         {
-            transform.localEulerAngles = angleOffset;
-            Debug.Log(transform.localPosition.x);
-            Debug.Log(transform.localPosition.y);
-            Debug.Log(transform.localPosition.z);
-            transform.localPosition = Vector3.zero + Quaternion.Euler(angleOffset) * distOffset;
-            Debug.Log(transform.localPosition.x);
-            Debug.Log(transform.localPosition.y);
-            Debug.Log(transform.localPosition.z);
+            transform.position = Vector3.zero + Quaternion.Euler(angleOffset) * distOffset;
+            transform.eulerAngles = angleOffset;
         }
     }
 }
