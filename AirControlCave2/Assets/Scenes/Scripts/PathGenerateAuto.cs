@@ -107,10 +107,18 @@ public class PathGenerateAuto : MonoBehaviour
                 //rotate again
                 transform.Rotate(0, 90, 0);
                 TerminalpathGen = false;
-            }
+            } 
 
     }     
 
+     public void RunWayA(){
+        currentRunway = 2;
+    }
+
+    public void RunWayB() {
+        currentRunway = 3;
+    }
+    
     public void TerminalToggleButton(){
         print(EventSystem.current.currentSelectedGameObject.name);
         if(EventSystem.current.currentSelectedGameObject.name == "Runway A"){
