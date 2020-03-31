@@ -30,7 +30,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class PlaneMenu : MonoBehaviour {
+public class GroundMenu : MonoBehaviour {
 
     public Selectable[] menuItems;
     public int currentItem = 0;
@@ -42,9 +42,9 @@ public class PlaneMenu : MonoBehaviour {
     float currentScale;
     public float showMenuSpeed = 5;
 
-    public PlaneMenuManager menuManager;
+    public MenuManager menuManager;
     public bool activeMenu = false;
-    public PlaneMenu previousMenu;
+    public GroundMenu previousMenu;
 
     public float menuProgress;
 
@@ -52,8 +52,7 @@ public class PlaneMenu : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        maxScale = transform.localScale.x;
-        menuManager = GetComponentInParent<PlaneMenuManager>();
+        menuManager = GetComponentInParent<MenuManager>();
         pointerData = new PointerEventData(EventSystem.current);
 
         if(menuItems.Length > 0)
@@ -79,33 +78,7 @@ public class PlaneMenu : MonoBehaviour {
             newScale = 0;
         }
 
-        if(GetComponent<UndockMenu>())
-        {
-            if(GetComponent<UndockMenu>().undocked)
-            {
-                newScale = maxScale;
-                showMenu = false;
-
-                if (activeMenu)
-                {
-                    transform.Translate(Vector3.right);
-                    if (previousMenu)
-                    {
-                        previousMenu.showMenu = true;
-                        menuManager.currentMenu = previousMenu;
-                    }
-                    activeMenu = false;
-                    menuManager.openMenus--;
-                    menuManager.PlayCloseMenuSound();
-                }
-                return;
-            }
-            else if(!showMenu)
-            {
-                newScale = 0;
-            }
-        }
-        UpdateScale();
+          UpdateScale();
 
         if (newScale > 0)
         {
@@ -213,7 +186,7 @@ public class PlaneMenu : MonoBehaviour {
                 previousMenu.showMenu = false;
                 transform.position = previousMenu.transform.position;
             }
-
+            newScale = maxScale;
             menuManager.openMenus++;
             menuManager.PlayOpenMenuSound();
         }
@@ -229,6 +202,7 @@ public class PlaneMenu : MonoBehaviour {
                 previousMenu.showMenu = true;
                 menuManager.currentMenu = previousMenu;
             }
+            newScale = 0;
             activeMenu = false;
             menuManager.openMenus--;
             menuManager.PlayCloseMenuSound();

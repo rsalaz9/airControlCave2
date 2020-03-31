@@ -28,12 +28,12 @@
  using UnityEngine;
 using System.Collections;
 
-public class PlaneMenuManager : MonoBehaviour {
+public class MenuManager : MonoBehaviour {
 
     public int menuWandID = 1;
 
-    public PlaneMenu mainMenu;
-    public PlaneMenu currentMenu;
+    public GroundMenu mainMenu;
+    public GroundMenu currentMenu;
 
     public int openMenus;
 
@@ -44,9 +44,6 @@ public class PlaneMenuManager : MonoBehaviour {
     public Vector3 angleOffset;
     public Vector3 distOffset = Vector3.forward;
 
-    // CAVE2 Omegalib-style
-    // public CAVE2.Button menuOpenButton = CAVE2.Button.Button2;
-    //public CAVE2.Button menuBackButton = CAVE2.Button.Button3;
     public CAVE2.Button selectButton = CAVE2.Button.Button2;
 
     [SerializeField]
@@ -63,16 +60,8 @@ public class PlaneMenuManager : MonoBehaviour {
 
     AudioSource audioSource;
 
-    private bool objectGrabbed;
-    private SelectObject c;
-
     // Use this for initialization
     void Start () {
-        c = GetComponentInParent<SelectObject>();
-        if (c != null)
-        {
-        objectGrabbed = c.grabbed;
-        }
         currentMenu = mainMenu;
         audioSource = GetComponent<AudioSource>();
         if(audioSource == null)
@@ -85,13 +74,7 @@ public class PlaneMenuManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (c != null)
-        {
-        objectGrabbed = c.grabbed;
-        }
-
-        if (currentMenu == mainMenu && currentMenu.activeMenu == false)
+        if (currentMenu == mainMenu && currentMenu.activeMenu == false){}
 
         CAVE2.Input.SetWandMenuLock(menuWandID, openMenus > 0);
     }
@@ -99,16 +82,16 @@ public class PlaneMenuManager : MonoBehaviour {
     public void OpenMenuManager()
     {
         angleOffset = new Vector3(0, CAVE2.Input.GetWandRotation(menuWandID).eulerAngles.y, 0);
-        //GetComponentInChildren<PlaneMenu>().SetWandAngle(angleOffset, distOffset);
-        this.SetWandAngle(angleOffset);
+        //GetComponentInChildren<GroundMenu>().SetWandAngle(angleOffset, distOffset);
         //CAVE2.SendMessage(gameObject.name, "SetWandAngle", angleOffset);
         //CAVE2.SendMessage(mainMenu.name, "OpenMenu");
-        GetComponentInChildren<PlaneMenu>().OpenMenu();
+        //GetComponentInChildren<GroundMenu>().SetWandAngle(angleOffset, distOffset);
+        GetComponentInChildren<GroundMenu>().OpenMenu();
     }
 
     public void CloseMenuManager()
     {
-        GetComponentInChildren<PlaneMenu>().CloseMenu();
+        GetComponentInChildren<GroundMenu>().CloseMenu();
         //CAVE2.SendMessage(mainMenu.name, "CloseMenu");
     }
     
