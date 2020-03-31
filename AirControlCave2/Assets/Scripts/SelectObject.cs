@@ -74,6 +74,10 @@ public class SelectObject : CAVE2Interactable {
     Material touchingOverMaterial;
 
     Color originalTouchingMatColor;
+    // public GameObject menu;
+
+    // MenuManager menuManager;
+
 
     private void Start()
     {
@@ -126,6 +130,9 @@ public class SelectObject : CAVE2Interactable {
         renderer.sharedMaterial = pointingOverMaterial;
 
         renderer.enabled = false;
+
+        // menu = (GameObject)Instantiate(menu);
+        // menuManager = menu.GetComponent<MenuManager>();
     }
     void Update()
     {
@@ -180,12 +187,16 @@ public class SelectObject : CAVE2Interactable {
 
     void OnWandGrab()
     {
+       Debug.Log("plane selected onWandGrab");
+       //menuManager.OpenMenuManager();
        GetComponentInChildren<PlaneMenuManager>().OpenMenuManager();
         grabbed = true;
     }
 
     void OnWandGrabRelease()
     {
+        //Debug.Log("plane not selected onWandGrabRelease");
+        //menuManager.CloseMenuManager();
         GetComponentInChildren<PlaneMenuManager>().CloseMenuManager();
         grabbed = false;
     }
