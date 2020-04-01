@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,6 +7,8 @@ using UnityEngine.UI;
 
 public class PathGenerateAuto : MonoBehaviour
 {
+    public SelectObject objectSelect = new SelectObject();
+
     public Transform [] target; //target objects i.e. push, terminals
     // public int p; //for now acting as the menu button
     public float speed; // speed of our plane
@@ -23,6 +26,9 @@ public class PathGenerateAuto : MonoBehaviour
     bool TerminalpathGen = false;
     bool takeoff = false;
 
+    bool pushFromGate = true;
+    int pushCurrent;
+
     //boolean to keep everything in place
     bool push = true;
     bool taxi = true;
@@ -32,25 +38,26 @@ public class PathGenerateAuto : MonoBehaviour
     bool toTheAirA = false;
     bool toTheAirB = false;
 
+
     // Update is called once per frame
     void Update()
     {
         
         //plane will push back 
         if(PushpathGen == true){
-            print("push path called");
-            PushpathGenerator(0); //method for push
+            // print("push path called");
+            PushpathGenerator(); //method for push
             //it will taxi then
             // print("push flag" + push);
         }    
         if(push == false && taxiPath == true){
-            print("terminal called");
+            // print("terminal called");
             // print("i am called");
             TaxiPathGenerator(1); //method for taxi
         }
         //then we will move to the terminal
         if(push == false && taxi == false && TerminalpathGen == true){
-            print("runway called");
+            // print("runway called");
             TerminalpathGenerator(currentRunway); //method for terminal
         }  
 
@@ -62,18 +69,48 @@ public class PathGenerateAuto : MonoBehaviour
     }
 
     //it will generate push back path
-    public void PushpathGenerator(int current){
-            
-                if(transform.position != target[current].position){
-                    Vector3 pos =  Vector3.MoveTowards(transform.position, target[current].position, speed * Time.deltaTime);
-                    GetComponent<Rigidbody>().MovePosition(pos);
-                }else if(transform.position == target[current].position){
-                    //let's rotate the object
-                    transform.Rotate(0, 90, 0);
-                    // checkTargetVariable();
-                    PushpathGen = false;
-                    push = false;
-                }
+    public void PushpathGenerator(){
+
+        // print("object position" + transform.position);
+        // print("push B position" + target[12].position);
+        if(pushFromGate){
+            print("object position" + transform.position);
+            print("gate A" + target[11].position);
+            print("gate B" + target[12].position);
+            print("gate C" + target[13].position);
+            print("Gate D" + target[14].position);
+            print("name " + objectSelect.gameObjectName);
+            // print(Enumerable.Range(target[12].position + 5, target[12].position - 5).Contains(transform.position));
+            if(objectSelect.gameObjectName == "Aeroplane (2)"){ //gate A
+                print("Gate A");
+                pushCurrent = 8 ; //push A
+            }
+            else if(objectSelect.gameObjectName == "Aeroplane"){ //gate B
+                print("Gate B");
+                pushCurrent = 0; //push B
+            }
+            else if(objectSelect.gameObjectName == "Aeroplane (1)"){ //gate C
+                print("gate C");
+                pushCurrent = 9; //push C
+            }
+            else if(objectSelect.gameObjectName == "Aeroplane (3)"){ //gate D
+                print("Gate D");
+                pushCurrent = 10 ; //push D
+            }
+
+            pushFromGate = false;
+
+        }
+        if(transform.position != target[pushCurrent].position){
+            Vector3 pos =  Vector3.MoveTowards(transform.position, target[pushCurrent].position, speed * Time.deltaTime);
+            GetComponent<Rigidbody>().MovePosition(pos);
+        }else if(transform.position == target[pushCurrent].position){
+            //let's rotate the object
+            transform.Rotate(0, 90, 0);
+            // checkTargetVariable();
+            PushpathGen = false;
+            push = false;
+        }
 
     }
 

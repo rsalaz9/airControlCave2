@@ -66,8 +66,16 @@ public class PlaneMenuManager : MonoBehaviour {
     private bool objectGrabbed;
     private SelectObject c;
 
+    float FixeScale =1; 
+    GameObject parent;
+
+    private bool ismenuOpen;
+
+
     // Use this for initialization
     void Start () {
+        ismenuOpen = false;
+        parent = this.transform.parent.gameObject;
         c = GetComponentInParent<SelectObject>();
         if (c != null)
         {
@@ -94,6 +102,10 @@ public class PlaneMenuManager : MonoBehaviour {
         if (currentMenu == mainMenu && currentMenu.activeMenu == false)
 
         CAVE2.Input.SetWandMenuLock(menuWandID, openMenus > 0);
+        if (ismenuOpen) {
+            transform.position = Vector3.zero + Quaternion.Euler(angleOffset) * distOffset;
+            transform.eulerAngles = angleOffset;
+        }
     }
 
     public void OpenMenuManager()
@@ -104,12 +116,14 @@ public class PlaneMenuManager : MonoBehaviour {
         //CAVE2.SendMessage(gameObject.name, "SetWandAngle", angleOffset);
         //CAVE2.SendMessage(mainMenu.name, "OpenMenu");
         GetComponentInChildren<PlaneMenu>().OpenMenu();
+        ismenuOpen = true;
     }
 
     public void CloseMenuManager()
     {
         GetComponentInChildren<PlaneMenu>().CloseMenu();
         //CAVE2.SendMessage(mainMenu.name, "CloseMenu");
+        ismenuOpen = false;
     }
     
     public void PlayOpenMenuSound()
