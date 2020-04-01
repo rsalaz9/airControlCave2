@@ -151,7 +151,13 @@ public class PlaneMenu : MonoBehaviour {
 
         if(CAVE2.Input.GetButtonDown(menuManager.menuWandID, menuManager.selectButton))
         {
-            this.CloseMenu();
+            if(menuManager.mainMenu != this ){
+                this.CloseMenu();
+                menuManager.mainMenu.CloseMenu();
+            } 
+            else {
+                this.CloseMenu();
+            }
             this.MenuSelectItem();
             //CAVE2.SendMessage(gameObject.name, "CloseMenu");
             //CAVE2.SendMessage(gameObject.name, "MenuSelectItem");
