@@ -8,6 +8,8 @@ TagManager:
   - ScoreManager
   - TakeOffATarget
   - TakeOffBTarget
+  - airplane
+  - GameOver
   layers:
   - Default
   - TransparentFX
