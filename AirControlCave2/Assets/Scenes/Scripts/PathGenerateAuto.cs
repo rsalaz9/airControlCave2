@@ -68,6 +68,17 @@ public class PathGenerateAuto : MonoBehaviour
 
     }
 
+     //hold position
+    public void holdPosition(){
+        if(push == true){
+            PushToggleButton();
+        }else if(push == false && taxi == true){
+            TaxiToggleButton();
+        }else if(push == false && taxi == false && runway == true){
+            TerminalpathGen = !TerminalpathGen;
+        }
+    }
+
     //it will generate push back path
     public void PushpathGenerator(){
 
