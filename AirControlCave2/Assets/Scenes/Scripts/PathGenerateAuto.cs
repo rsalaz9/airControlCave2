@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PathGenerateAuto : MonoBehaviour
 {
@@ -38,6 +39,14 @@ public class PathGenerateAuto : MonoBehaviour
     bool toTheAirA = false;
     bool toTheAirB = false;
 
+    bool playedSound;
+    AudioSource audioSource;
+   [SerializeField] AudioClip audioTakeOff;
+
+    void Start(){
+        audioSource = GetComponent<AudioSource>();
+        playedSound = true;
+    }
 
     // Update is called once per frame
     void Update()
@@ -63,9 +72,18 @@ public class PathGenerateAuto : MonoBehaviour
 
         //then let's take off our plane
         if(push == false && taxi == false && runway == false && takeoff == true){
+            Invoke("playTakeOffSound",10f);
             TakeOffPathGenerator();
         }      
 
+    }
+
+    public void playTakeOffSound(){
+        if (!audioSource.isPlaying && playedSound ==  true ){
+            audioSource.PlayOneShot(audioTakeOff);
+            playedSound = false;
+        }
+        
     }
 
      //hold position
@@ -189,6 +207,7 @@ public class PathGenerateAuto : MonoBehaviour
     }
 
     public void TakeOffPathGenerator(){
+       
         print("i am taking off");
         print(currentRunway);
         if(currentRunway == 2){ // we will go to 4,5

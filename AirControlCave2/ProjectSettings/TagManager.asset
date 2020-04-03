@@ -10,6 +10,10 @@ TagManager:
   - TakeOffBTarget
   - airplane
   - GameOver
+  - Fire
+  - Fire1
+  - Fire2
+  - GameOverLight
   layers:
   - Default
   - TransparentFX
