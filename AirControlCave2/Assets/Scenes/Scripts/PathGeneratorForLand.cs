@@ -172,8 +172,8 @@ public class PathGeneratorForLand : MonoBehaviour
 
                     if(transform.position == target[endPos].position){
                         holdPosition = false;
-                        // Instantiate(prefab);//, new Vector3(target[endPos].position.x,target[endPos].position.y,target[endPos].position.z));//, Quaternion.identity);
-                        // Destroy(gameObject);
+                        Instantiate(prefab, pos, prefab.transform.rotation);//, new Vector3(target[endPos].position.x,target[endPos].position.y,target[endPos].position.z));//, Quaternion.identity);
+                        Destroy(gameObject);
                     }
 
                 }
