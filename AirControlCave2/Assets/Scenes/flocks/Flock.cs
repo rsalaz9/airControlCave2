@@ -38,14 +38,17 @@ public class Flock : MonoBehaviour
         squareNeighborRadius = neighborRadius * neighborRadius;
         squareAvoidanceRadius =  squareNeighborRadius * avoidRadiusMultiplier * avoidRadiusMultiplier;
          Vector3 rotationVector = new Vector3(0,0, 1);
+         Vector3 vect = new Vector3(0.7f,0.4f, 0.8f);
         for (int i = 0; i <startingCount; i++){
             FlockAgent newAgent = Instantiate(
                 agentPrefab,
                 Random.insideUnitCircle * startingCount * AgentDensity,
-
-                Quaternion.Euler(rotationVector * Random.Range(0f,50f)),
+                Quaternion.Euler(rotationVector * Random.Range(0f,10f)),
                 transform
             );
+            newAgent.transform.Rotate(30.0f, 90.0f, 0.0f);
+            newAgent.transform.Translate(vect * -100);
+            //newAgent.transform.Rotate(0.0f, 90.0f, 180.0f);
             newAgent.name = "Agent" + i;
             agents.Add(newAgent);
         }
@@ -58,12 +61,13 @@ public class Flock : MonoBehaviour
             List<Transform> context = GetNearbyObjects(agent);
 
 
-            // Vector3 move = behavior.CalculateMove(agent, context, this);
-            // move *= driveFactor;
-            // if(move.sqrMagnitude > squareMaxSpeed){
-            //     move = move.normalized * maxSpeed;
-            // }
-            // agent.Move(move);
+            Vector3 move = behavior.CalculateMove(agent, context, this);
+            move *= driveFactor;
+            if(move.sqrMagnitude > squareMaxSpeed){
+                move = move.normalized * maxSpeed;
+            }
+             //agent.transform.Rotate(-90.0f, -90.0f, 90.0f);
+            agent.Move(move);
         }
     }
 
