@@ -11,12 +11,14 @@ public class PlaneController : MonoBehaviour
     public GameObject fire;
     public GameObject redLight;
 
+
     void Start(){
             gameover = GameObject.Find("GameOver");
-            redLight = GameObject.Find("GameOverLight");
+            redLight = GameObject.Find("FlickeringLight");
             gameover.active = false;
             fire.active = false;
             redLight.active = false;
+
     }
 
         void OnCollisionEnter(Collision theCollision)
