@@ -47,12 +47,15 @@ public class GroundMenu : MonoBehaviour {
     public GroundMenu previousMenu;
 
     public float menuProgress;
+    public GameObject instantiatedOriginPlane;
 
     float maxScale = 1;
 
     // Use this for initialization
     void Start () {
         menuManager = GetComponentInParent<MenuManager>();
+        instantiatedOriginPlane = menuManager.instantiatedOrigin;
+        Debug.Log(instantiatedOriginPlane);
         pointerData = new PointerEventData(EventSystem.current);
 
         if(menuItems.Length > 0)
@@ -124,10 +127,18 @@ public class GroundMenu : MonoBehaviour {
 
         if(CAVE2.Input.GetButtonDown(menuManager.menuWandID, menuManager.selectButton))
         {
-            this.CloseMenu();
-            this.MenuSelectItem();
+            // this.CloseMenu();
+            // this.MenuSelectItem();
             //CAVE2.SendMessage(gameObject.name, "CloseMenu");
             //CAVE2.SendMessage(gameObject.name, "MenuSelectItem");
+            if(menuManager.mainMenu != this ){
+                this.CloseMenu();
+                menuManager.mainMenu.CloseMenu();
+            } 
+            else {
+                this.CloseMenu();
+            }
+            this.MenuSelectItem();
         }
 
         if (CAVE2.Input.GetButtonDown(menuManager.menuWandID, CAVE2.Button.ButtonLeft))
@@ -297,6 +308,33 @@ public class GroundMenu : MonoBehaviour {
     {
         if (menuItems[currentItem].GetType() == typeof(Button))
         {
+            // if plane reference exists
+            if (instantiatedOriginPlane) {
+                // call correct path generation depending on menu selection
+                string buttonText = ((Button)menuItems[currentItem]).GetComponentInChildren<Text>().text;
+                if (buttonText.Equals("Push Back >")){
+                    Debug.Log(menuManager.instantiatedOrigin);
+                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGenerateAuto>().PushToggleButton());
+                }
+                else if (buttonText.Equals("Taxi >")){
+                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGenerateAuto>().TaxiToggleButton());
+                }
+                else if (buttonText.Equals("Hold Position >")){
+                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGenerateAuto>().holdPosition());
+                }
+                else if (buttonText.Equals("Hold Position >")){
+                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGenerateAuto>().holdPosition());
+                }
+                else if (buttonText.Equals("Take Off >")){
+                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGenerateAuto>().TakeOfPermission());
+                }
+                else if (buttonText.Equals("Runway A >")){
+                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGenerateAuto>().RunwayAToggleButton());
+                }
+                else if (buttonText.Equals("Runway B >")){
+                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGenerateAuto>().RunwayBToggleButton());
+                }
+            }
             ((Button)menuItems[currentItem]).OnPointerClick(pointerData);
         }
         menuManager.PlaySelectMenuSound();

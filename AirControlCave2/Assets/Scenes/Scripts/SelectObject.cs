@@ -74,9 +74,9 @@ public class SelectObject : CAVE2Interactable {
     Material touchingOverMaterial;
 
     Color originalTouchingMatColor;
-    // public GameObject menu;
+    public GameObject menu;
 
-    // MenuManager menuManager;
+    MenuManager menuManager;
 
     public string gameObjectName;
 
@@ -133,8 +133,10 @@ public class SelectObject : CAVE2Interactable {
 
         renderer.enabled = false;
 
-        // menu = (GameObject)Instantiate(menu);
-        // menuManager = menu.GetComponent<MenuManager>();
+        menu = (GameObject)Instantiate(menu);
+        menuManager = menu.GetComponent<MenuManager>();
+        Debug.Log(gameObject);
+        menuManager.instantiatedOrigin = gameObject;
     }
     void Update()
     {
@@ -189,19 +191,19 @@ public class SelectObject : CAVE2Interactable {
 
     void OnWandGrab()
     {
-    //    Debug.Log(gameObject.name);
-       //menuManager.OpenMenuManager();
-       GetComponentInChildren<PlaneMenuManager>().OpenMenuManager();
-       gameObjectName = gameObject.name;
-       Debug.Log(gameObjectName);
+       //Debug.Log(gameObject.name);
+       menuManager.OpenMenuManager();
+       //GetComponentInChildren<PlaneMenuManager>().OpenMenuManager();
+       //gameObjectName = gameObject.name;
+       //Debug.Log(gameObjectName);
         grabbed = true;
     }
 
     void OnWandGrabRelease()
     {
         //Debug.Log("plane not selected onWandGrabRelease");
-        //menuManager.CloseMenuManager();
-        GetComponentInChildren<PlaneMenuManager>().CloseMenuManager();
+        menuManager.CloseMenuManager();
+        //GetComponentInChildren<PlaneMenuManager>().CloseMenuManager();
         grabbed = false;
     }
 }

@@ -60,8 +60,11 @@ public class MenuManager : MonoBehaviour {
 
     AudioSource audioSource;
 
+    public GameObject instantiatedOrigin;
+
     // Use this for initialization
     void Start () {
+        Debug.Log(instantiatedOrigin);
         currentMenu = mainMenu;
         audioSource = GetComponent<AudioSource>();
         if(audioSource == null)
@@ -82,6 +85,7 @@ public class MenuManager : MonoBehaviour {
     public void OpenMenuManager()
     {
         angleOffset = new Vector3(0, CAVE2.Input.GetWandRotation(menuWandID).eulerAngles.y, 0);
+        this.SetWandAngle(angleOffset);
         //GetComponentInChildren<GroundMenu>().SetWandAngle(angleOffset, distOffset);
         //CAVE2.SendMessage(gameObject.name, "SetWandAngle", angleOffset);
         //CAVE2.SendMessage(mainMenu.name, "OpenMenu");
