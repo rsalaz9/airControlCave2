@@ -28,12 +28,12 @@
  using UnityEngine;
 using System.Collections;
 
-public class MenuManager : MonoBehaviour {
+public class AirMenuManager : MonoBehaviour {
 
     public int menuWandID = 1;
 
-    public GroundMenu mainMenu;
-    public GroundMenu currentMenu;
+    public AirMenu mainMenu;
+    public AirMenu currentMenu;
 
     public int openMenus;
 
@@ -86,17 +86,12 @@ public class MenuManager : MonoBehaviour {
     {
         angleOffset = new Vector3(0, CAVE2.Input.GetWandRotation(menuWandID).eulerAngles.y, 0);
         this.SetWandAngle(angleOffset);
-        //GetComponentInChildren<GroundMenu>().SetWandAngle(angleOffset, distOffset);
-        //CAVE2.SendMessage(gameObject.name, "SetWandAngle", angleOffset);
-        //CAVE2.SendMessage(mainMenu.name, "OpenMenu");
-        //GetComponentInChildren<GroundMenu>().SetWandAngle(angleOffset, distOffset);
-        GetComponentInChildren<GroundMenu>().OpenMenu();
+        GetComponentInChildren<AirMenu>().OpenMenu();
     }
 
     public void CloseMenuManager()
     {
-        GetComponentInChildren<GroundMenu>().CloseMenu();
-        //CAVE2.SendMessage(mainMenu.name, "CloseMenu");
+        GetComponentInChildren<AirMenu>().CloseMenu();
     }
     
     public void PlayOpenMenuSound()

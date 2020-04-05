@@ -118,7 +118,7 @@ public class PathGenerateAuto : MonoBehaviour
                 print("Gate B");
                 pushCurrent = 0; //push B
             }
-            else if(objectSelect.gameObjectName == "Aeroplane (1)"){ //gate C
+            else if(objectSelect.gameObjectName == "GroundPlane"){ //gate C
                 print("gate C");
                 pushCurrent = 9; //push C
             }
@@ -144,6 +144,7 @@ public class PathGenerateAuto : MonoBehaviour
     }
 
     public void PushToggleButton(){
+        print("pushtoggle was called");
         PushpathGen = !PushpathGen;
         // TerminalpathGen = !TerminalpathGen;
         // print("Push path" + PushpathGen);
