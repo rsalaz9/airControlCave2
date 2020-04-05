@@ -7,6 +7,9 @@ public class PathGeneratorForLand : MonoBehaviour
     public Transform [] target; //target objects i.e. push, terminals
     public float speed = 50f; // speed of our plane
 
+    GameObject [] pathGameobject = new GameObject[12];
+    bool objectAdded = true;
+
     public GameObject prefab;
 
     bool holdPosition = true;
@@ -36,6 +39,10 @@ public class PathGeneratorForLand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+         if(objectAdded){
+            populateTarget();
+        }
+
         if(animation){
             holdPosition = false;
             makeThePlaneAnimation();
@@ -46,6 +53,54 @@ public class PathGeneratorForLand : MonoBehaviour
         }
        
         
+    }
+
+    public void populateTarget(){
+                //make the references of the objects
+
+        pathGameobject[0] = GameObject.Find("Push A");
+        // target[0] = pathGameobject[0].transform;
+
+        pathGameobject[1] = GameObject.Find("Gate A");
+        // target[1] = pathGameobject[1].transform;
+
+        pathGameobject[2] = GameObject.Find("Push B");
+        // target[2] = pathGameobject[2].transform;
+
+        pathGameobject[3] = GameObject.Find("Gate B");
+        // target[3] = pathGameobject[3].transform;
+
+        pathGameobject[4] = GameObject.Find("Push C");
+        // target[4] = pathGameobject[4].transform;
+
+        pathGameobject[5] = GameObject.Find("Gate C");
+        // target[5] = pathGameobject[5].transform;
+
+        pathGameobject[6] = GameObject.Find("Push D");
+        // target[6] = pathGameobject[6].transform;
+
+        pathGameobject[7] = GameObject.Find("Gate D");
+        // target[7] = pathGameobject[7].transform;
+
+        pathGameobject[8] = GameObject.Find("Air Position");
+        // target[8] = pathGameobject[8].transform;
+
+        pathGameobject[9] = GameObject.Find("Landed On Ground B");
+        // target[9] = pathGameobject[9].transform;
+
+        pathGameobject[10] = GameObject.Find("Move Forward to the ground B");
+        // target[10] = pathGameobject[10].transform;
+
+        pathGameobject[11] = GameObject.Find("End of the Road");
+        // target[11] = pathGameobject[11].transform;
+
+        print(pathGameobject);
+        for(int i = 0 ; i < pathGameobject.Length ; i++ ){
+            target[i] = pathGameobject[i].transform;
+            print(i);
+        }
+        objectAdded = false;
+
     }
 
 

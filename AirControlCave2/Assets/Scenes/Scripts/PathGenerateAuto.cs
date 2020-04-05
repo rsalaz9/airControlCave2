@@ -11,6 +11,9 @@ public class PathGenerateAuto : MonoBehaviour
     public SelectObject objectSelect = new SelectObject();
 
     public Transform [] target; //target objects i.e. push, terminals
+    // Transform testTarget;
+    GameObject [] pathGameobject = new GameObject[15];
+    bool objectAdded = true;
     // public int p; //for now acting as the menu button
     public float speed; // speed of our plane
 
@@ -46,11 +49,22 @@ public class PathGenerateAuto : MonoBehaviour
     void Start(){
         audioSource = GetComponent<AudioSource>();
         playedSound = true;
+        
+        // testTarget = testGame.transform;
+        // print(testGame);
+        // GameObject game = GameObject.Find("Gate D");
+        // print(game);
+        // Transform test = game.transform;
+        // target[14] = test;
+        // print(target[14].position);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(objectAdded){
+            populateTarget();
+        }
         
         //plane will push back 
         if(PushpathGen == true){
@@ -75,6 +89,64 @@ public class PathGenerateAuto : MonoBehaviour
             Invoke("playTakeOffSound",10f);
             TakeOffPathGenerator();
         }      
+
+    }
+
+    public void populateTarget(){
+                //make the references of the objects
+
+        pathGameobject[0] = GameObject.Find("Push B");
+        // target[0] = pathGameobject[0].transform;
+
+        pathGameobject[1] = GameObject.Find("Taxi");
+        // target[1] = pathGameobject[1].transform;
+
+        pathGameobject[2] = GameObject.Find("RunwayA");
+        // target[2] = pathGameobject[2].transform;
+
+        pathGameobject[3] = GameObject.Find("RunwayB");
+        // target[3] = pathGameobject[3].transform;
+
+        pathGameobject[4] = GameObject.Find("Takeoff to ground A");
+        // target[4] = pathGameobject[4].transform;
+
+        pathGameobject[5] = GameObject.Find("ground to air A");
+        // target[5] = pathGameobject[5].transform;
+
+        pathGameobject[6] = GameObject.Find("Takeoff to ground B");
+        // target[6] = pathGameobject[6].transform;
+
+        pathGameobject[7] = GameObject.Find("ground to air B");
+        // target[7] = pathGameobject[7].transform;
+
+        pathGameobject[8] = GameObject.Find("Push A");
+        // target[8] = pathGameobject[8].transform;
+
+        pathGameobject[9] = GameObject.Find("Push C");
+        // target[9] = pathGameobject[9].transform;
+
+        pathGameobject[10] = GameObject.Find("Push D");
+        // target[10] = pathGameobject[10].transform;
+
+        pathGameobject[11] = GameObject.Find("Gate A");
+        // target[11] = pathGameobject[11].transform;
+
+        pathGameobject[12] = GameObject.Find("Gate B");
+        // target[12] = pathGameobject[12].transform;
+
+        pathGameobject[13] = GameObject.Find("Gate C");
+        // target[13] = pathGameobject[13].transform;
+
+        pathGameobject[14] = GameObject.Find("Gate D");
+        // target[14] = pathGameobject[14].transform;
+        // populateTarget(pathGameobject);
+
+        print(pathGameobject);
+        for(int i = 0 ; i < pathGameobject.Length ; i++ ){
+            target[i] = pathGameobject[i].transform;
+            print(i);
+        }
+        objectAdded = false;
 
     }
 
