@@ -30,7 +30,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class GroundMenu : MonoBehaviour {
+public class AirMenu : MonoBehaviour {
 
     public Selectable[] menuItems;
     public int currentItem = 0;
@@ -42,9 +42,9 @@ public class GroundMenu : MonoBehaviour {
     float currentScale;
     public float showMenuSpeed = 5;
 
-    public MenuManager menuManager;
+    public AirMenuManager menuManager;
     public bool activeMenu = false;
-    public GroundMenu previousMenu;
+    public AirMenu previousMenu;
 
     public float menuProgress;
     public GameObject instantiatedOriginPlane;
@@ -53,7 +53,7 @@ public class GroundMenu : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        menuManager = GetComponentInParent<MenuManager>();
+        menuManager = GetComponentInParent<AirMenuManager>();
         instantiatedOriginPlane = menuManager.instantiatedOrigin;
         Debug.Log(instantiatedOriginPlane);
         pointerData = new PointerEventData(EventSystem.current);
@@ -312,27 +312,21 @@ public class GroundMenu : MonoBehaviour {
             if (instantiatedOriginPlane) {
                 // call correct path generation depending on menu selection
                 string buttonText = ((Button)menuItems[currentItem]).GetComponentInChildren<Text>().text;
-                if (buttonText.Equals("Push Back >")){
+                if (buttonText.Equals("Gate A >")){
                     Debug.Log(menuManager.instantiatedOrigin);
-                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGenerateAuto>().PushToggleButton());
+                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGeneratorForLand>().GateA());
                 }
-                else if (buttonText.Equals("Taxi >")){
-                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGenerateAuto>().TaxiToggleButton());
+                else if (buttonText.Equals("Gate B >")){
+                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGeneratorForLand>().GateB());
+                }
+                else if (buttonText.Equals("Gate C >")){
+                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGeneratorForLand>().GateC());
+                }
+                else if (buttonText.Equals("Gate D >")){
+                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGeneratorForLand>().GateD());
                 }
                 else if (buttonText.Equals("Hold Position >")){
-                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGenerateAuto>().holdPosition());
-                }
-                else if (buttonText.Equals("Hold Position >")){
-                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGenerateAuto>().holdPosition());
-                }
-                else if (buttonText.Equals("Take Off >")){
-                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGenerateAuto>().TakeOfPermission());
-                }
-                else if (buttonText.Equals("Runway A >")){
-                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGenerateAuto>().RunwayAToggleButton());
-                }
-                else if (buttonText.Equals("Runway B >")){
-                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGenerateAuto>().RunwayBToggleButton());
+                    ((Button)menuItems[currentItem]).onClick.AddListener(() => instantiatedOriginPlane.GetComponent<PathGeneratorForLand>().holPositioButton());
                 }
             }
             ((Button)menuItems[currentItem]).OnPointerClick(pointerData);

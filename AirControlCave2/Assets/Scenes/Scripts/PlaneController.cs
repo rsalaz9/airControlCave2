@@ -26,8 +26,10 @@ public class PlaneController : MonoBehaviour
         if(theCollision.gameObject.tag == "TakeOffATarget" || theCollision.gameObject.tag == "TakeOffBTarget" ){
                 Debug.Log("collision detected");
                 scoreManager.AddPoint();
-                Destroy(gameObject);
-                
+                Debug.Log(gameObject);
+                //also have to destroy menu that was instantiated for that plane
+                Destroy(gameObject.GetComponent<SelectObject>().menu);
+                Destroy(gameObject);  
         }
 
         if(theCollision.gameObject.tag == "airplane") {

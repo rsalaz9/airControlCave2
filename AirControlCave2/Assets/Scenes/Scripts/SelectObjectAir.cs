@@ -28,7 +28,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class SelectObject : CAVE2Interactable {
+public class SelectObjectAir : CAVE2Interactable {
 
     public enum HoldingStyle { ButtonPress };
 
@@ -76,7 +76,7 @@ public class SelectObject : CAVE2Interactable {
     Color originalTouchingMatColor;
     public GameObject menu;
 
-    MenuManager menuManager;
+    AirMenuManager menuManager;
 
     public string gameObjectName;
 
@@ -134,7 +134,7 @@ public class SelectObject : CAVE2Interactable {
         renderer.enabled = false;
 
         menu = (GameObject)Instantiate(menu);
-        menuManager = menu.GetComponent<MenuManager>();
+        menuManager = menu.GetComponent<AirMenuManager>();
         Debug.Log(gameObject);
         menuManager.instantiatedOrigin = gameObject;
     }
