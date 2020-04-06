@@ -78,7 +78,8 @@ public class SelectObject : CAVE2Interactable {
 
     MenuManager menuManager;
 
-    public string gameObjectName;
+    // public string gameObjectName;
+    public GameObject selecetedGameObject; //getting the reference of the selected game object from on wand grab
 
 
     private void Start()
@@ -191,11 +192,12 @@ public class SelectObject : CAVE2Interactable {
 
     void OnWandGrab()
     {
-       //Debug.Log(gameObject.name);
+    //    Debug.Log(gameObject.transform.position);
        menuManager.OpenMenuManager();
        //GetComponentInChildren<PlaneMenuManager>().OpenMenuManager();
-       //gameObjectName = gameObject.name;
-       //Debug.Log(gameObjectName);
+       selecetedGameObject = gameObject;
+    //    GameObject test = GameObject.Find(gameObjectName);
+    //    Debug.Log(gameObjectName);
         grabbed = true;
     }
 

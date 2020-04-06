@@ -175,29 +175,31 @@ public class PathGenerateAuto : MonoBehaviour
         // print("object position" + transform.position);
         // print("push B position" + target[12].position);
         if(pushFromGate){
-            print("object position" + transform.position);
-            print("gate A" + target[11].position);
-            print("gate B" + target[12].position);
-            print("gate C" + target[13].position);
-            print("Gate D" + target[14].position);
-            print("name " + objectSelect.gameObjectName);
+            // print("object position" + transform.position);
+            // print("push A" + target[8].position);
+            // print("push B" + target[0].position);
+            // print("push C" + target[9].position);
+            // print("push D" + target[10].position);
+            // print("name " + objectSelect.selecetedGameObject);
+
+            generatePushPosition(objectSelect.selecetedGameObject.transform.position, target[8].position, target[0].position, target[9].position, target[10].position);
             // print(Enumerable.Range(target[12].position + 5, target[12].position - 5).Contains(transform.position));
-            if(objectSelect.gameObjectName == "Aeroplane (2)"){ //gate A
-                print("Gate A");
-                pushCurrent = 8 ; //push A
-            }
-            else if(objectSelect.gameObjectName == "Aeroplane"){ //gate B
-                print("Gate B");
-                pushCurrent = 0; //push B
-            }
-            else if(objectSelect.gameObjectName == "GroundPlane"){ //gate C
-                print("gate C");
-                pushCurrent = 9; //push C
-            }
-            else if(objectSelect.gameObjectName == "Aeroplane (3)"){ //gate D
-                print("Gate D");
-                pushCurrent = 10 ; //push D
-            }
+            // if(objectSelect.gameObjectName == "Aeroplane (2)"){ //gate A
+            //     print("Gate A");
+            //     pushCurrent = 8 ; //push A
+            // }
+            // else if(objectSelect.gameObjectName == "Aeroplane"){ //gate B
+            //     print("Gate B");
+            //     pushCurrent = 0; //push B
+            // }
+            // else if(objectSelect.gameObjectName == "GroundPlane"){ //gate C
+            //     print("gate C");
+            //     pushCurrent = 9; //push C
+            // }
+            // else if(objectSelect.gameObjectName == "Aeroplane (3)"){ //gate D
+            //     print("Gate D");
+            //     pushCurrent = 10 ; //push D
+            // }
 
             pushFromGate = false;
 
@@ -213,6 +215,33 @@ public class PathGenerateAuto : MonoBehaviour
             push = false;
         }
 
+    }
+
+    public void generatePushPosition(Vector3 plane, Vector3 pushToA, Vector3 pushToB, Vector3 pushToC, Vector3 pushToD){
+        // distance between two points = ( (x1 - x2)^2 + (y1 - y2)^2 + (z1 - z2)^2 )^1/2
+        double distanceA = Math.Sqrt( (plane.x - pushToA.x) * (plane.x - pushToA.x) + (plane.y - pushToA.y) * (plane.y - pushToA.y) + (plane.z - pushToA.z) * (plane.z - pushToA.z));
+        double distanceB = Math.Sqrt( (plane.x - pushToB.x) * (plane.x - pushToB.x) + (plane.y - pushToB.y) * (plane.y - pushToB.y) + (plane.z - pushToB.z) * (plane.z - pushToB.z));
+        double distanceC = Math.Sqrt( (plane.x - pushToC.x) * (plane.x - pushToC.x) + (plane.y - pushToC.y) * (plane.y - pushToC.y) + (plane.z - pushToC.z) * (plane.z - pushToC.z));
+        double distanceD = Math.Sqrt( (plane.x - pushToD.x) * (plane.x - pushToD.x) + (plane.y - pushToD.y) * (plane.y - pushToD.y) + (plane.z - pushToD.z) * (plane.z - pushToD.z));
+
+        // double [] alldistance = {distanceA, distanceB, distanceC,distanceD};
+
+        // double minDistance = alldistance.Min();
+        //8  0  9  10
+        print("A " + distanceA + " B " + distanceB + " C " + distanceC + " D " + distanceD);
+        
+        if(distanceA < distanceB && distanceA < distanceC && distanceA < distanceD){
+            //pushA
+            pushCurrent = 8;
+        }else if(distanceB < distanceA && distanceB < distanceC && distanceB < distanceD){
+            //push b
+            pushCurrent = 0;
+        }else if(distanceC < distanceA && distanceC < distanceB && distanceC < distanceD){
+            //push c
+            pushCurrent = 9;
+        }else if(distanceD < distanceA && distanceD < distanceB && distanceD < distanceC){
+            pushCurrent = 10;
+        }
     }
 
     public void PushToggleButton(){
