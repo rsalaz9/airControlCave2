@@ -41931,7 +41931,8 @@ MonoBehaviour:
   pointingOverMaterial: {fileID: 0}
   showTouchingOver: 1
   touchingOverMaterial: {fileID: 0}
-  gameObjectName: 
+  menu: {fileID: 0}
+  selecetedGameObject: {fileID: 0}
 --- !u!65 &937858273
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50973,7 +50974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 6453855304142416896, guid: 68b9ae1c8a488894ab7cc9b556e782b6,
     type: 3}
-  behavior: {fileID: 0}
+  behavior: {fileID: 11400000, guid: e63cf478c7da1ce4da8543ee24263ac3, type: 2}
   startingCount: 50
   driveFactor: 10
   maxSpeed: 5
@@ -97252,7 +97253,8 @@ MonoBehaviour:
   pointingOverMaterial: {fileID: 0}
   showTouchingOver: 1
   touchingOverMaterial: {fileID: 0}
-  gameObjectName: 
+  menu: {fileID: 0}
+  selecetedGameObject: {fileID: 0}
 --- !u!65 &2115357673
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -41387,6 +41387,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallOfFire
       objectReference: {fileID: 0}
+    - target: {fileID: 118616, guid: 8c51d7df2d29ba8449f85eb74c672555, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 494314, guid: 8c51d7df2d29ba8449f85eb74c672555, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
