@@ -7,7 +7,7 @@ public class PathGeneratorForLand : MonoBehaviour
     public Transform [] target; //target objects i.e. push, terminals
     public float speed = 50f; // speed of our plane
 
-    GameObject [] pathGameobject = new GameObject[12];
+    GameObject [] pathGameobject = new GameObject[15];
     bool objectAdded = true;
 
     public GameObject prefab;
@@ -21,9 +21,12 @@ public class PathGeneratorForLand : MonoBehaviour
     bool gateButtonClicked = false;
 
     //for animation
-    bool landB = true;
+    public bool landB = false;
     bool moveForB = false;
     bool end = false;
+
+    public bool landA = false;
+    bool moveForA = false;
 
     bool animation = true;
     AudioSource audioSource;
@@ -82,7 +85,7 @@ public class PathGeneratorForLand : MonoBehaviour
         pathGameobject[7] = GameObject.Find("Gate D");
         // target[7] = pathGameobject[7].transform;
 
-        pathGameobject[8] = GameObject.Find("Air Position");
+        pathGameobject[8] = GameObject.Find("Air Position B");
         // target[8] = pathGameobject[8].transform;
 
         pathGameobject[9] = GameObject.Find("Landed On Ground B");
@@ -94,93 +97,101 @@ public class PathGeneratorForLand : MonoBehaviour
         pathGameobject[11] = GameObject.Find("End of the Road");
         // target[11] = pathGameobject[11].transform;
 
+        pathGameobject[12] = GameObject.Find("Air Position A");
+        // target[8] = pathGameobject[8].transform;
+
+        pathGameobject[13] = GameObject.Find("Landed On Ground A");
+        // target[9] = pathGameobject[9].transform;
+
+        pathGameobject[14] = GameObject.Find("Move Forward to the ground A");
+        // target[10] = pathGameobject[10].transform;        
+
         print(pathGameobject);
         for(int i = 0 ; i < pathGameobject.Length ; i++ ){
             target[i] = pathGameobject[i].transform;
-            print(i);
+            //print(i);
         }
         objectAdded = false;
-
     }
 
 
     //let's animate the plane 
     public void makeThePlaneAnimation(){
+        if (landB){
+            LandOnRunwayB();
+        }
+        else {
+            LandOnRunwayA();
+        }           
+    }
 
-        //later we will use these to decide the runways
-      //  if(currentRunway == 2){ 
-            int airPosition = 8;
-            int landedOnGroundB = 9;
-            int moveForwardB = 10;
-            int endOfTheRoad = 11;
-
-            // if(landB == false &&  transform.position != target[airPosition].position){
-            //     Vector3 pos =  Vector3.MoveTowards(transform.position, target[airPosition].position, speed * Time.deltaTime);
-            //     GetComponent<Rigidbody>().MovePosition(pos);
-            // }else if(transform.position == target[airPosition].position){
-            //     landB == true;
-            // } 
-
-            if(landB == true && moveForB == false && transform.position != target[landedOnGroundB].position){
+    public void LandOnRunwayB() {
+        int airPosition = 8;
+        int landedOnGroundB = 9;
+        int moveForwardB = 10;
+        int endOfTheRoad = 11;
+        if(landB == true && moveForB == false && transform.position != target[landedOnGroundB].position){
                 
-                Vector3 pos =  Vector3.MoveTowards(transform.position, target[landedOnGroundB].position, speed * Time.deltaTime);
-                GetComponent<Rigidbody>().MovePosition(pos);
-            }else if(transform.position == target[landedOnGroundB].position){
-                // transform.Rotate(0,-90,0);
-                moveForB = true;
-                 playTakeOffSound();
-            }
+            Vector3 pos =  Vector3.MoveTowards(transform.position, target[landedOnGroundB].position, speed * Time.deltaTime);
+            GetComponent<Rigidbody>().MovePosition(pos);
+        }else if(transform.position == target[landedOnGroundB].position){
+            // transform.Rotate(0,-90,0);
+            moveForB = true;
+                playTakeOffSound();
+        }
 
-            if(landB == true && moveForB == true && end == false && transform.position != target[moveForwardB].position){
-                Vector3 pos =  Vector3.MoveTowards(transform.position, target[moveForwardB].position, speed * Time.deltaTime);
-                GetComponent<Rigidbody>().MovePosition(pos);
-            }else if(transform.position == target[moveForwardB].position){
+        if(landB == true && moveForB == true && end == false && transform.position != target[moveForwardB].position){
+            Vector3 pos =  Vector3.MoveTowards(transform.position, target[moveForwardB].position, speed * Time.deltaTime);
+            GetComponent<Rigidbody>().MovePosition(pos);
+        }else if(transform.position == target[moveForwardB].position){
+            transform.Rotate(0,90,0);
+            end = true;
+        }
+
+        if(landB && end){
+
+            Vector3 pos =  Vector3.MoveTowards(transform.position, target[endOfTheRoad].position, speed * Time.deltaTime);
+            GetComponent<Rigidbody>().MovePosition(pos);
+
+            if(transform.position == target[endOfTheRoad].position){
                 transform.Rotate(0,90,0);
-                end = true;
-            }
+                holdPosition = true;
+                animation = false;
+                speed = 10f;
+                }      
+        }
+    }
 
-            if(end){
+    public void LandOnRunwayA() {
+        int airPosition = 12;
+        int landedOnGroundA = 13;
+        int moveForwardA = 14;
+        int endOfTheRoad = 11;
+        if(landA == true && moveForA == false && transform.position != target[landedOnGroundA].position){
+            Vector3 pos =  Vector3.MoveTowards(transform.position, target[landedOnGroundA].position, speed * Time.deltaTime);
+            GetComponent<Rigidbody>().MovePosition(pos);
+        }else if(transform.position == target[landedOnGroundA].position){
+            moveForA = true;
+            playTakeOffSound();
+        }
+        if(landA == true && moveForA == true && end == false && transform.position != target[moveForwardA].position){
+            Vector3 pos =  Vector3.MoveTowards(transform.position, target[moveForwardA].position, speed * Time.deltaTime);
+            GetComponent<Rigidbody>().MovePosition(pos);
+        }else if(transform.position == target[moveForwardA].position){
+            transform.Rotate(0,90,0);
+            end = true;
+        }
+        if(landA && end){
+            Vector3 pos =  Vector3.MoveTowards(transform.position, target[endOfTheRoad].position, speed * Time.deltaTime);
+            GetComponent<Rigidbody>().MovePosition(pos);
 
-                Vector3 pos =  Vector3.MoveTowards(transform.position, target[endOfTheRoad].position, speed * Time.deltaTime);
-                GetComponent<Rigidbody>().MovePosition(pos);
-
-                if(transform.position == target[endOfTheRoad].position){
-                    transform.Rotate(0,90,0);
-                    holdPosition = true;
-                    animation = false;
-                    speed = 10f;
-                 }      
-            }
-
-
-
-
-        //}
-
-
-        //we will need it later
-        // else if(currentRunway == 3){ // we will go to 6,7
-        //     int runToGroundB = 6;
-        //     int groundToAirB = 7;
-
-        //     if(toTheAirB == false && transform.position != target[runToGroundB].position){
-        //         Vector3 pos =  Vector3.MoveTowards(transform.position, target[runToGroundB].position, speed * Time.deltaTime);
-        //         GetComponent<Rigidbody>().MovePosition(pos);
-        //     }else if(transform.position == target[runToGroundB].position){
-        //         toTheAirB = true;
-        //     } 
-
-        //     if(toTheAirB){
-        //         Vector3 pos =  Vector3.MoveTowards(transform.position, target[groundToAirB].position, speed * Time.deltaTime);
-        //         GetComponent<Rigidbody>().MovePosition(pos);
-
-        //         if(transform.position == target[groundToAirB].position){
-        //             Destroy(gameObject);
-        //         }
-        //     }
-
-        // }
-
+            if(transform.position == target[endOfTheRoad].position){
+                transform.Rotate(0,90,0);
+                holdPosition = true;
+                animation = false;
+                speed = 10f;
+                }      
+        }
     }
 
 
@@ -228,6 +239,8 @@ public class PathGeneratorForLand : MonoBehaviour
                     if(transform.position == target[endPos].position){
                         holdPosition = false;
                         Instantiate(prefab, pos, prefab.transform.rotation);//, new Vector3(target[endPos].position.x,target[endPos].position.y,target[endPos].position.z));//, Quaternion.identity);
+                        //also have to destroy menu that was instantiated for that plane
+                        Destroy(gameObject.GetComponent<SelectObjectAir>().menu);
                         Destroy(gameObject);
                     }
 

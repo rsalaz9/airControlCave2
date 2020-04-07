@@ -5492,7 +5492,7 @@ GameObject:
   - component: {fileID: 1964723879}
   m_Layer: 0
   m_Name: Aeroplane
-  m_TagString: airplane
+  m_TagString: InAirPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5599,7 +5599,8 @@ MonoBehaviour:
   pointingOverMaterial: {fileID: 0}
   showTouchingOver: 1
   touchingOverMaterial: {fileID: 0}
-  gameObjectName: 
+  menu: {fileID: 0}
+  selecetedGameObject: {fileID: 0}
 --- !u!114 &848678236829405573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41541,12 +41542,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e55fc18317743454989852dbba936c7f, type: 3}
---- !u!224 &2241673754657961995 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224000012694070268, guid: e55fc18317743454989852dbba936c7f,
-    type: 3}
-  m_PrefabInstance: {fileID: 2019803633501346807}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5425618203985319263 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6290512415777099432, guid: e55fc18317743454989852dbba936c7f,
@@ -41559,6 +41554,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b62026f957f4a819c468d8b24d23c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &2241673754657961995 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224000012694070268, guid: e55fc18317743454989852dbba936c7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2019803633501346807}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2019803633525394465
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3486,7 +3486,7 @@ GameObject:
   - component: {fileID: 6246827755204551893}
   m_Layer: 0
   m_Name: GroundPlane
-  m_TagString: airplane
+  m_TagString: GroundPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3593,7 +3593,7 @@ MonoBehaviour:
   showTouchingOver: 1
   touchingOverMaterial: {fileID: 0}
   menu: {fileID: 4069449159316252845, guid: b42bb882240a04477a8d0f74fa1000f1, type: 3}
-  gameObjectName: 
+  selecetedGameObject: {fileID: 0}
 --- !u!114 &6246827755204551902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3628,7 +3628,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 0}
-  gameover: {fileID: 0}
+  gameover: {fileID: 3144393844956782859, guid: fe526ccd962d1471ea3feda7dcc3c4c5,
+    type: 3}
   fire: {fileID: 6246827755049229022}
   redLight: {fileID: 0}
 --- !u!33 &6246827755204551903
