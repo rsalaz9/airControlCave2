@@ -50,7 +50,7 @@ public class PlaneController : MonoBehaviour
                 Destroy(gameObject);  
         }
 
-        if(theCollision.gameObject.tag == "GroundPlane" || theCollision.gameObject.tag == "inAirPlane" ) {
+        if(theCollision.gameObject.tag == "GroundPlane" || theCollision.gameObject.tag == "InAirPlane" ) {
                 Debug.Log("collision detected");
                 Invoke("Restart",5f);
                 fire.active = true;
