@@ -256,10 +256,12 @@ public class PathGenerateAuto : MonoBehaviour
     }
 
     public void PushToggleButton(){
-        print("pushtoggle was called");
+        print("pushtoggle was calledul");
         PushpathGen = !PushpathGen;
         pushed = true;
         Transform childWarning = gameObject.transform.Find("Warning(Clone)");
+        Debug.Log("childWarnign");
+        Debug.Log(childWarning);
         if (childWarning){
             Destroy(childWarning.gameObject);
         }
