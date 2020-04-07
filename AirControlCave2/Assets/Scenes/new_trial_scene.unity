@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5444145, g: 0.50700045, b: 0.5242461, a: 1}
+  m_IndirectSpecularColor: {r: 0.5444019, g: 0.5070022, b: 0.524245, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2904,6 +2904,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 1243629157}
   speed: 5
+  inGateForLongTime: 0
+  startTime: 0
+  currentTime: 0
+  timeAtGate: 0
   audioTakeOff: {fileID: 0}
 --- !u!1 &504166845
 GameObject:
@@ -12461,6 +12465,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643984238}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1647919721
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1647919723}
+  - component: {fileID: 1647919722}
+  m_Layer: 0
+  m_Name: Flocks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1647919722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1647919721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd01495ddb5b3145a1f67962d48e14a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentPrefab: {fileID: 6453855304142416896, guid: 68b9ae1c8a488894ab7cc9b556e782b6,
+    type: 3}
+  behavior: {fileID: 11400000, guid: e63cf478c7da1ce4da8543ee24263ac3, type: 2}
+  startingCount: 50
+  driveFactor: 10
+  maxSpeed: 5
+  neighborRadius: 1.5
+  avoidRadiusMultiplier: 0.5
+--- !u!4 &1647919723
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1647919721}
+  m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
+  m_LocalPosition: {x: -0.86000824, y: 23.037354, z: 35.27173}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 90}
 --- !u!1001 &1649179687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12968,6 +13023,7 @@ MonoBehaviour:
     type: 3}
   getGroundCount: []
   getAirCount: []
+  PlaneLongestAtGate: []
 --- !u!1 &1699068823
 GameObject:
   m_ObjectHideFlags: 0

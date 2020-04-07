@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Default Flock Behavior
   m_EditorClassIdentifier: 
   behaviors:
-  - {fileID: 11400000, guid: c56b9791df7061043b71d5d0f405060e, type: 2}
+  - {fileID: 11400000, guid: 224a305b4037caa44837e7413ec7a170, type: 2}
   - {fileID: 11400000, guid: ea78723299bbe3340a6725663e996a28, type: 2}
   - {fileID: 11400000, guid: e711d67bd07827c40b1dfaf88ecdc398, type: 2}
   weights:
