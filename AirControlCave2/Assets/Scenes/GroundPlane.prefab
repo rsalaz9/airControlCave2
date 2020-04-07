@@ -3537,6 +3537,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   speed: 10
+  inGateForLongTime: 0
+  startTime: 0
+  currentTime: 0
+  timeAtGate: 0
   audioTakeOff: {fileID: 8300000, guid: 90ac82d1a87099944a664b5c8dd5f8ab, type: 3}
 --- !u!54 &6246827755204551891
 Rigidbody:
@@ -3628,6 +3632,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 0}
+  warningPrefab: {fileID: 1000014137608800, guid: 59fc041619bbc494ca5363fce886311f,
+    type: 3}
+  warningInstance: {fileID: 0}
   gameover: {fileID: 3144393844956782859, guid: fe526ccd962d1471ea3feda7dcc3c4c5,
     type: 3}
   fire: {fileID: 6246827755049229022}

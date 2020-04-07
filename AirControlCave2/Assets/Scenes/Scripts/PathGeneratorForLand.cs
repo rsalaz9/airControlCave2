@@ -120,7 +120,7 @@ public class PathGeneratorForLand : MonoBehaviour
         if (landB){
             LandOnRunwayB();
         }
-        else {
+        else if (landA){
             LandOnRunwayA();
         }           
     }
@@ -130,7 +130,7 @@ public class PathGeneratorForLand : MonoBehaviour
         int landedOnGroundB = 9;
         int moveForwardB = 10;
         int endOfTheRoad = 11;
-        if(landB == true && moveForB == false && transform.position != target[landedOnGroundB].position){
+        if(moveForB == false && transform.position != target[landedOnGroundB].position){
                 
             Vector3 pos =  Vector3.MoveTowards(transform.position, target[landedOnGroundB].position, speed * Time.deltaTime);
             GetComponent<Rigidbody>().MovePosition(pos);
@@ -140,7 +140,7 @@ public class PathGeneratorForLand : MonoBehaviour
                 playTakeOffSound();
         }
 
-        if(landB == true && moveForB == true && end == false && transform.position != target[moveForwardB].position){
+        if(moveForB == true && end == false && transform.position != target[moveForwardB].position){
             Vector3 pos =  Vector3.MoveTowards(transform.position, target[moveForwardB].position, speed * Time.deltaTime);
             GetComponent<Rigidbody>().MovePosition(pos);
         }else if(transform.position == target[moveForwardB].position){
@@ -148,7 +148,7 @@ public class PathGeneratorForLand : MonoBehaviour
             end = true;
         }
 
-        if(landB && end){
+        if(moveForB && end){
 
             Vector3 pos =  Vector3.MoveTowards(transform.position, target[endOfTheRoad].position, speed * Time.deltaTime);
             GetComponent<Rigidbody>().MovePosition(pos);
@@ -167,21 +167,21 @@ public class PathGeneratorForLand : MonoBehaviour
         int landedOnGroundA = 13;
         int moveForwardA = 14;
         int endOfTheRoad = 11;
-        if(landA == true && moveForA == false && transform.position != target[landedOnGroundA].position){
+        if(moveForA == false && transform.position != target[landedOnGroundA].position){
             Vector3 pos =  Vector3.MoveTowards(transform.position, target[landedOnGroundA].position, speed * Time.deltaTime);
             GetComponent<Rigidbody>().MovePosition(pos);
         }else if(transform.position == target[landedOnGroundA].position){
             moveForA = true;
             playTakeOffSound();
         }
-        if(landA == true && moveForA == true && end == false && transform.position != target[moveForwardA].position){
+        if(moveForA == true && end == false && transform.position != target[moveForwardA].position){
             Vector3 pos =  Vector3.MoveTowards(transform.position, target[moveForwardA].position, speed * Time.deltaTime);
             GetComponent<Rigidbody>().MovePosition(pos);
         }else if(transform.position == target[moveForwardA].position){
             transform.Rotate(0,90,0);
             end = true;
         }
-        if(landA && end){
+        if(moveForA && end){
             Vector3 pos =  Vector3.MoveTowards(transform.position, target[endOfTheRoad].position, speed * Time.deltaTime);
             GetComponent<Rigidbody>().MovePosition(pos);
 
