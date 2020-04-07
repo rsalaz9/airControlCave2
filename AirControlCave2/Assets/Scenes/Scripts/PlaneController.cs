@@ -61,7 +61,7 @@ public class PlaneController : MonoBehaviour
     }
 
     void Restart(){
-        SceneManager.LoadScene("Predefined_Path_with_menu");
+        SceneManager.LoadScene("new_trial_scene");
     }
 
     public void GenerateDepartureWarning(){
