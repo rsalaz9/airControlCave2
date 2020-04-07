@@ -64,7 +64,7 @@ public class PathGenerateAuto : MonoBehaviour
         currentTime = Time.time;
         if (pushed == false){
             timeAtGate = currentTime - startTime;
-            if (timeAtGate > 20){
+            if (timeAtGate > 15){
                 inGateForLongTime = true;
             }
         }
@@ -259,6 +259,10 @@ public class PathGenerateAuto : MonoBehaviour
         print("pushtoggle was called");
         PushpathGen = !PushpathGen;
         pushed = true;
+        Transform childWarning = gameObject.transform.Find("Warning(Clone)");
+        if (childWarning){
+            Destroy(childWarning.gameObject);
+        }
         // TerminalpathGen = !TerminalpathGen;
         // print("Push path" + PushpathGen);
     }

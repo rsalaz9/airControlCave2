@@ -7,6 +7,8 @@ public class PlaneController : MonoBehaviour
 {
     // Start is called before the first frame update
     public Score scoreManager;
+    public GameObject warningPrefab;
+    public GameObject warningInstance;
     GameObject score;
     public GameObject gameover;
     public GameObject fire;
@@ -37,7 +39,7 @@ public class PlaneController : MonoBehaviour
 
     }
 
-        void OnCollisionEnter(Collision theCollision)
+    void OnCollisionEnter(Collision theCollision)
     {
         if(theCollision.gameObject.tag == "TakeOffATarget" || theCollision.gameObject.tag == "TakeOffBTarget" ){
                 Debug.Log("collision detected");
@@ -60,5 +62,11 @@ public class PlaneController : MonoBehaviour
 
     void Restart(){
         SceneManager.LoadScene("Predefined_Path_with_menu");
+    }
+
+    public void GenerateDepartureWarning(){
+        Debug.Log(transform.position);
+        warningInstance = Instantiate(warningPrefab, transform.position, transform.rotation);
+        warningInstance.transform.parent = gameObject.transform;
     }
 }

@@ -15,11 +15,17 @@ public class PlaneTrackerManager : MonoBehaviour
     Vector3 AirPositionB;
     public GameObject[] getGroundCount;
     public GameObject[] getAirCount;
-    public GameObject [] PlaneLongestAtGate;
+    public GameObject [] PlanesAtGate;
+    public GameObject PlaneLongestAtGate = null;
+    public GameObject plane = null;    
+    private float nextActionTime = 0f;
+    public float period = 30f;
+    public float currentTime;
+    int count =0;
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
         GateA = GameObject.Find("Gate A").transform.position;
         GateB = GameObject.Find("Gate B").transform.position;
         GateC = GameObject.Find("Gate C").transform.position;
@@ -40,9 +46,33 @@ public class PlaneTrackerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
+        currentTime = Time.time;
         getGroundCount = GameObject.FindGameObjectsWithTag("GroundPlane");
         getAirCount = GameObject.FindGameObjectsWithTag("InAirPlane"); 
-        PlaneLongestAtGate = getGroundCount.OrderBy(GPlane => GPlane.GetComponent<PathGenerateAuto>().timeAtGate).ToArray();
-        Debug.Log(PlaneLongestAtGate);
+        PlanesAtGate = getGroundCount.OrderBy(GPlane => GPlane.GetComponent<PathGenerateAuto>().timeAtGate).ToArray();
+        PlaneLongestAtGate = PlanesAtGate[PlanesAtGate.Length-1];
+        if (PlaneLongestAtGate != plane){
+            Debug.Log("something");
+            if (PlaneLongestAtGate.GetComponent<PathGenerateAuto>().inGateForLongTime){
+            // Debug.Log(PlaneLongestAtGate);
+                if (count == 0){
+                    nextActionTime = 50f;
+                    GenerateWarningForReadyToDepart(PlaneLongestAtGate);
+                    count ++;
+                }
+                if (currentTime > nextActionTime){
+                    nextActionTime = Time.time + period;
+                    GenerateWarningForReadyToDepart(PlaneLongestAtGate);
+                    plane = PlaneLongestAtGate;
+                }                
+            }
+        }
+       
+    }
+
+    void GenerateWarningForReadyToDepart(GameObject PlaneLongestAtGate){
+        PlaneLongestAtGate.GetComponent<PlaneController>().GenerateDepartureWarning();
     }
 }
+
+
