@@ -36547,7 +36547,7 @@ GameObject:
   - component: {fileID: 3398368621219239347}
   m_Layer: 0
   m_Name: Aeroplane Land
-  m_TagString: airplane
+  m_TagString: InAirPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36717,8 +36717,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   speed: 10
   prefab: {fileID: 6246827755204551898, guid: 4c9644da2e48947c685963b8e202fbd3, type: 3}
+  landB: 0
+  landA: 0
   audioTakeOff: {fileID: 0}
 --- !u!82 &3398368621219239346
 AudioSource:

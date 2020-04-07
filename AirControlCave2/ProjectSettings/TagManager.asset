@@ -14,6 +14,9 @@ TagManager:
   - Fire1
   - Fire2
   - GameOverLight
+  - GroundPlane
+  - InAirPlane
+  - FlickeringLight
   layers:
   - Default
   - TransparentFX

@@ -24,11 +24,13 @@ public class PathGenerateAuto : MonoBehaviour
 
     //boolean to make sure update runs once only
     bool PushpathGen = false; 
+    bool pushed = false;
     bool taxiPath = false;
     bool terminalA = false;
     bool terminalB = false;
     bool TerminalpathGen = false;
     bool takeoff = false;
+    public bool inGateForLongTime =false;
 
     bool pushFromGate = true;
     int pushCurrent;
@@ -37,6 +39,10 @@ public class PathGenerateAuto : MonoBehaviour
     bool push = true;
     bool taxi = true;
     bool runway = true;
+
+    public float startTime;
+    public float currentTime;
+    public float timeAtGate;
 
     //run way air checker
     bool toTheAirA = false;
@@ -49,19 +55,24 @@ public class PathGenerateAuto : MonoBehaviour
     void Start(){
         audioSource = GetComponent<AudioSource>();
         playedSound = true;
-        
-        // testTarget = testGame.transform;
-        // print(testGame);
-        // GameObject game = GameObject.Find("Gate D");
-        // print(game);
-        // Transform test = game.transform;
-        // target[14] = test;
-        // print(target[14].position);
+        startTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        currentTime = Time.time;
+        if (pushed == false){
+            timeAtGate = currentTime - startTime;
+            if (timeAtGate > 20){
+                inGateForLongTime = true;
+            }
+        }
+        else {
+            startTime = currentTime;
+            inGateForLongTime = false;
+        }
+
         if(objectAdded){
             populateTarget();
         }
@@ -144,7 +155,7 @@ public class PathGenerateAuto : MonoBehaviour
         print(pathGameobject);
         for(int i = 0 ; i < pathGameobject.Length ; i++ ){
             target[i] = pathGameobject[i].transform;
-            print(i);
+            //print(i);
         }
         objectAdded = false;
 
@@ -247,6 +258,7 @@ public class PathGenerateAuto : MonoBehaviour
     public void PushToggleButton(){
         print("pushtoggle was called");
         PushpathGen = !PushpathGen;
+        pushed = true;
         // TerminalpathGen = !TerminalpathGen;
         // print("Push path" + PushpathGen);
     }

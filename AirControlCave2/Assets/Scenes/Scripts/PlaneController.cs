@@ -7,17 +7,33 @@ public class PlaneController : MonoBehaviour
 {
     // Start is called before the first frame update
     public Score scoreManager;
+    GameObject score;
     public GameObject gameover;
     public GameObject fire;
     public GameObject redLight;
 
 
     void Start(){
-            gameover = GameObject.Find("GameOver");
-            redLight = GameObject.Find("FlickeringLight");
+            score = GameObject.Find("Score");
+            scoreManager = score.GetComponent<Score>();
+            gameover = null;
+            //GameObject.Find("") doesn't work for finding objects that are disabled so this is a way to find the inactive objects
+            Transform[] trans1 = GameObject.Find("UI").GetComponentsInChildren<Transform>(true);
+            foreach (Transform t in trans1) {
+                if (t.gameObject.name == "GameOver") {
+                    gameover = t.gameObject;
+                }
+            }
+            redLight = null;
+            Transform[] trans2 = GameObject.Find("UI").GetComponentsInChildren<Transform>(true);
+            foreach (Transform t in trans2) {
+                if (t.gameObject.name == "FlickeringLight") {
+                    redLight = t.gameObject;
+                }
+            }
             gameover.active = false;
             fire.active = false;
-            redLight.active = false;
+            redLight.active =false;
 
     }
 
@@ -32,7 +48,7 @@ public class PlaneController : MonoBehaviour
                 Destroy(gameObject);  
         }
 
-        if(theCollision.gameObject.tag == "airplane") {
+        if(theCollision.gameObject.tag == "GroundPlane" || theCollision.gameObject.tag == "inAirPlane" ) {
                 Debug.Log("collision detected");
                 Invoke("Restart",5f);
                 fire.active = true;
