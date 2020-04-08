@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Flock/Behavior/Cohesion")]
 public class CohesionBehavior : FlockBehavior
 {
+    
+    Vector3 currentVelocity;
+    public float agentSmoothTime = 0.5f;
 
     public override Vector3 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
     {
@@ -21,6 +24,7 @@ public class CohesionBehavior : FlockBehavior
 
         //create offset from agent position
         cohesionMove -= (Vector3)agent.transform.position;
+        cohesionMove = Vector3.SmoothDamp(agent.transform.up, cohesionMove, ref currentVelocity, agentSmoothTime);
         return cohesionMove;
     }
 }
