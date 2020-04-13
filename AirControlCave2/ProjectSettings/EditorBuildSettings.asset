@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/new_trial_scene.unity
     guid: d535a12726c5a4b7f9bfffa5274d7077
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Controls.unity
     guid: d2d0d7a47da3bea4b97d4cd08af3cf9f
   m_configObjects: {}

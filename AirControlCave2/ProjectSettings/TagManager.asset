@@ -17,6 +17,10 @@ TagManager:
   - GroundPlane
   - InAirPlane
   - FlickeringLight
+  - takeOffsManager
+  - landingManager
+  - LandingsManager
+  - TakeOffsManager
   layers:
   - Default
   - TransparentFX

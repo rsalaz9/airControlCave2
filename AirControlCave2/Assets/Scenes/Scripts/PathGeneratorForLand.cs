@@ -33,10 +33,19 @@ public class PathGeneratorForLand : MonoBehaviour
    [SerializeField] AudioClip audioTakeOff;
 
     bool playedSound;
+    public Score scoreManager;
+    GameObject score;
+    GameObject landings;
+    public Landings landingsManager;
 
     void Start(){
         audioSource = GetComponent<AudioSource>();
         playedSound = true;
+        score = GameObject.Find("Score");
+        scoreManager = score.GetComponent<Score>();
+
+        landings = GameObject.Find("Landings");
+        landingsManager = landings.GetComponent<Landings>();
     }
 
     // Update is called once per frame
@@ -254,6 +263,8 @@ public class PathGeneratorForLand : MonoBehaviour
         gateButtonClicked = true;
         startPos = 0;
         endPos = 1;
+        scoreManager.AddLandingScore();
+        landingsManager.AddLandingsPoint();
 
     }
     public void GateB(){
@@ -261,18 +272,24 @@ public class PathGeneratorForLand : MonoBehaviour
         gateButtonClicked = true;
         startPos = 2;
         endPos = 3;
+        scoreManager.AddLandingScore();
+        landingsManager.AddLandingsPoint();
     }
     public void GateC(){
         print("gateC");
         gateButtonClicked = true;
         startPos = 4;
         endPos = 5;
+        scoreManager.AddLandingScore();
+        landingsManager.AddLandingsPoint();
     }
     public void GateD(){
         print("gateD");
         gateButtonClicked = true;
         startPos = 6;
         endPos = 7;
+        scoreManager.AddLandingScore();
+        landingsManager.AddLandingsPoint();
     }
     public void holPositioButton(){
         holdPosition = !holdPosition;

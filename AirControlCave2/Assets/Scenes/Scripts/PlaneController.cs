@@ -7,9 +7,12 @@ public class PlaneController : MonoBehaviour
 {
     // Start is called before the first frame update
     public Score scoreManager;
+    
+    public TakeOffs takeOffsManager;
     public GameObject warningPrefab;
     public GameObject warningInstance;
     GameObject score;
+    GameObject takeOffs;
     public GameObject gameover;
     public GameObject fire;
     public GameObject redLight;
@@ -18,6 +21,8 @@ public class PlaneController : MonoBehaviour
     void Start(){
             score = GameObject.Find("Score");
             scoreManager = score.GetComponent<Score>();
+            takeOffs = GameObject.Find("TakeOffs");
+            takeOffsManager = takeOffs.GetComponent<TakeOffs>();
             gameover = null;
             //GameObject.Find("") doesn't work for finding objects that are disabled so this is a way to find the inactive objects
             Transform[] trans1 = GameObject.Find("UI").GetComponentsInChildren<Transform>(true);
@@ -43,7 +48,8 @@ public class PlaneController : MonoBehaviour
     {
         if(theCollision.gameObject.tag == "TakeOffATarget" || theCollision.gameObject.tag == "TakeOffBTarget" ){
                 Debug.Log("collision detected");
-                scoreManager.AddPoint();
+                scoreManager.AddTakeOffScore();
+                takeOffsManager.AddTakeOffsPoint();
                 Debug.Log(gameObject);
                 //also have to destroy menu that was instantiated for that plane
                 Destroy(gameObject.GetComponent<SelectObject>().menu);

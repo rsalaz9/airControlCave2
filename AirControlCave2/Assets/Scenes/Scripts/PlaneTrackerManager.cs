@@ -47,6 +47,8 @@ public class PlaneTrackerManager : MonoBehaviour
 
         getGroundCount = GameObject.FindGameObjectsWithTag("GroundPlane");
         getAirCount = GameObject.FindGameObjectsWithTag("InAirPlane");
+
+
     }
 
     // Update is called once per frame

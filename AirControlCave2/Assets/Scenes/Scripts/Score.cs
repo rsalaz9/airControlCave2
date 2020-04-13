@@ -13,10 +13,27 @@ public class Score : MonoBehaviour
        
     }
 
-    public void AddPoint()
+    public void AddTakeOffScore()
     {
         Debug.Log("point added");
-        score++;
+        score = score+10;
+        scoreText.text = "Score: " + score;
+
+    }
+
+
+    public void DecreaseScore()
+    {
+        Debug.Log("point added");
+        score = score-5;
+        scoreText.text = "Score: " + score;
+
+    }
+
+    public void AddLandingScore()
+    {
+        Debug.Log("point added");
+        score = score+5;
         scoreText.text = "Score: " + score;
 
     }
