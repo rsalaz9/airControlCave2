@@ -32,6 +32,11 @@ public class PathGenerateAuto : MonoBehaviour
     bool takeoff = false;
     public bool inGateForLongTime =false;
 
+    //boolean to control the rotation
+    bool pushRotate = true;
+    bool taxiRotate = true;
+    bool terminalRotate = true;
+
     bool pushFromGate = true;
     int pushCurrent;
 
@@ -220,7 +225,11 @@ public class PathGenerateAuto : MonoBehaviour
             GetComponent<Rigidbody>().MovePosition(pos);
         }else if(transform.position == target[pushCurrent].position){
             //let's rotate the object
-            transform.Rotate(0, 90, 0);
+            if(pushRotate){
+                transform.Rotate(0, 90, 0);
+                pushRotate = false;
+
+            }
             // checkTargetVariable();
             PushpathGen = false;
             push = false;
@@ -280,7 +289,10 @@ public class PathGenerateAuto : MonoBehaviour
                 GetComponent<Rigidbody>().MovePosition(pos);
             }else if(transform.position == target[current].position){
                 //rotate again
-                transform.Rotate(0, 90, 0);
+                if(taxiRotate){
+                    transform.Rotate(0, 90, 0);
+                    taxiRotate = false;
+                }
                 taxiPath = false;
                 taxi = false;
             }
@@ -305,7 +317,9 @@ public class PathGenerateAuto : MonoBehaviour
                 GetComponent<Rigidbody>().MovePosition(pos);
             }else if(transform.position == target[current].position){
                 //rotate again
-                transform.Rotate(0, 90, 0);
+                if(terminalRotate){
+                    transform.Rotate(0, 90, 0);
+                }
                 TerminalpathGen = false;
                 runway = false;
             } 
