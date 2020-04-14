@@ -29,10 +29,13 @@ public class PathGeneratorForLand : MonoBehaviour
     bool moveForA = false;
 
     bool animation = true;
-    AudioSource audioSource;
-   [SerializeField] AudioClip audioTakeOff;
 
+
+    AudioSource audioSource;
+    [SerializeField] AudioClip audioLanding;
     bool playedSound;
+
+
     public Score scoreManager;
     GameObject score;
     GameObject landings;
@@ -41,6 +44,7 @@ public class PathGeneratorForLand : MonoBehaviour
     void Start(){
         audioSource = GetComponent<AudioSource>();
         playedSound = true;
+
         score = GameObject.Find("Score");
         scoreManager = score.GetComponent<Score>();
 
@@ -124,6 +128,14 @@ public class PathGeneratorForLand : MonoBehaviour
     }
 
 
+     public void playLandSound(){
+        if (!audioSource.isPlaying && playedSound ==  true ){
+            audioSource.PlayOneShot(audioLanding);
+            playedSound = false;
+        }
+        
+    }
+
     //let's animate the plane 
     public void makeThePlaneAnimation(){
         if (landB){
@@ -145,8 +157,9 @@ public class PathGeneratorForLand : MonoBehaviour
             GetComponent<Rigidbody>().MovePosition(pos);
         }else if(transform.position == target[landedOnGroundB].position){
             // transform.Rotate(0,-90,0);
+            // Invoke("playLandSound",10f);
+            playLandSound();
             moveForB = true;
-                playTakeOffSound();
         }
 
         if(moveForB == true && end == false && transform.position != target[moveForwardB].position){
@@ -154,6 +167,7 @@ public class PathGeneratorForLand : MonoBehaviour
             GetComponent<Rigidbody>().MovePosition(pos);
         }else if(transform.position == target[moveForwardB].position){
             transform.Rotate(0,90,0);
+            audioSource.Stop();
             end = true;
         }
 
@@ -180,14 +194,16 @@ public class PathGeneratorForLand : MonoBehaviour
             Vector3 pos =  Vector3.MoveTowards(transform.position, target[landedOnGroundA].position, speed * Time.deltaTime);
             GetComponent<Rigidbody>().MovePosition(pos);
         }else if(transform.position == target[landedOnGroundA].position){
+            playLandSound();
             moveForA = true;
-            playTakeOffSound();
+            // playTakeOffSound();
         }
         if(moveForA == true && end == false && transform.position != target[moveForwardA].position){
             Vector3 pos =  Vector3.MoveTowards(transform.position, target[moveForwardA].position, speed * Time.deltaTime);
             GetComponent<Rigidbody>().MovePosition(pos);
         }else if(transform.position == target[moveForwardA].position){
             transform.Rotate(0,90,0);
+            audioSource.Stop();
             end = true;
         }
         if(moveForA && end){
@@ -204,13 +220,13 @@ public class PathGeneratorForLand : MonoBehaviour
     }
 
 
-    public void playTakeOffSound(){
-        if (!audioSource.isPlaying && playedSound ==  true ){
-            audioSource.PlayOneShot(audioTakeOff);
-            playedSound = false;
-        }
+    // public void playTakeOffSound(){
+    //     if (!audioSource.isPlaying && playedSound ==  true ){
+    //         audioSource.PlayOneShot(audioTakeOff);
+    //         playedSound = false;
+    //     }
         
-    }
+    // }
 
 
 

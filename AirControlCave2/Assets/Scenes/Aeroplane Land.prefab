@@ -36587,6 +36587,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   speed: 10
+  inGateForLongTime: 0
+  startTime: 0
+  currentTime: 0
+  timeAtGate: 0
   audioTakeOff: {fileID: 8300000, guid: 90ac82d1a87099944a664b5c8dd5f8ab, type: 3}
 --- !u!54 &3398368621219239348
 Rigidbody:
@@ -36724,7 +36728,9 @@ MonoBehaviour:
   prefab: {fileID: 6246827755204551898, guid: 4c9644da2e48947c685963b8e202fbd3, type: 3}
   landB: 0
   landA: 0
-  audioTakeOff: {fileID: 0}
+  audioLanding: {fileID: 8300000, guid: 37fc0a78de07c0d45b82e78b8430eb20, type: 3}
+  scoreManager: {fileID: 0}
+  landingsManager: {fileID: 0}
 --- !u!82 &3398368621219239346
 AudioSource:
   m_ObjectHideFlags: 0
@@ -36834,6 +36840,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 0}
+  takeOffsManager: {fileID: 0}
+  warningPrefab: {fileID: 0}
+  warningInstance: {fileID: 0}
   gameover: {fileID: 0}
   fire: {fileID: 3398368619302696886}
   redLight: {fileID: 0}
