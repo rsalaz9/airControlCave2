@@ -31,6 +31,7 @@ using System.Collections;
 public class SelectObject : CAVE2Interactable {
 
     public enum HoldingStyle { ButtonPress };
+    bool warningGiven = false;
 
     [SerializeField]
     public bool grabbed;
@@ -192,13 +193,15 @@ public class SelectObject : CAVE2Interactable {
 
     void OnWandGrab()
     {
-    //    Debug.Log(gameObject.transform.position);
-       menuManager.OpenMenuManager();
-       //GetComponentInChildren<PlaneMenuManager>().OpenMenuManager();
-       selecetedGameObject = gameObject;
-    //    GameObject test = GameObject.Find(gameObjectName);
-    //    Debug.Log(gameObjectName);
-        grabbed = true;
+        //    Debug.Log(gameObject.transform.position);
+        Transform childWarning = gameObject.transform.Find("Warning(Clone)");
+        Debug.Log(childWarning);
+        if (childWarning || warningGiven){
+            menuManager.OpenMenuManager();
+            selecetedGameObject = gameObject;
+            grabbed = true;
+            warningGiven = true;
+        }      
     }
 
     void OnWandGrabRelease()
