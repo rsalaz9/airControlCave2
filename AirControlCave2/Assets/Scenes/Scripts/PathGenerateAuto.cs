@@ -69,7 +69,7 @@ public class PathGenerateAuto : MonoBehaviour
         currentTime = Time.time;
         if (pushed == false){
             timeAtGate = currentTime - startTime;
-            if (timeAtGate > 15){
+            if (timeAtGate > 5){
                 inGateForLongTime = true;
             }
         }
