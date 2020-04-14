@@ -28,6 +28,7 @@ public class PlaneTrackerManager : MonoBehaviour
     public int PlanesAtAirCount =0;
     private int PlanesAtAirCnt =-1;
     int count =0;
+    public System.Random random;
 
     // Start is called before the first frame update
     void Start()
@@ -47,8 +48,7 @@ public class PlaneTrackerManager : MonoBehaviour
 
         getGroundCount = GameObject.FindGameObjectsWithTag("GroundPlane");
         getAirCount = GameObject.FindGameObjectsWithTag("InAirPlane");
-
-
+        random = new System.Random();
     }
 
     // Update is called once per frame
@@ -69,11 +69,12 @@ public class PlaneTrackerManager : MonoBehaviour
             if (PlaneLongestAtGate.GetComponent<PathGenerateAuto>().inGateForLongTime){
             // Debug.Log(PlaneLongestAtGate);
                 if (count == 0){
-                    nextActionTime = 50f;
+                    nextActionTime = 25f;
                     GenerateWarningForReadyToDepart(PlaneLongestAtGate);
                     count ++;
                 }
                 if (currentTime > nextActionTime){
+                    period = random.Next(20, 40);
                     nextActionTime = Time.time + period;
                     GenerateWarningForReadyToDepart(PlaneLongestAtGate);
                     plane = PlaneLongestAtGate;

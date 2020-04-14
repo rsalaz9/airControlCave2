@@ -16,9 +16,21 @@ public class PlaneController : MonoBehaviour
     public GameObject gameover;
     public GameObject fire;
     public GameObject redLight;
+    Vector3 GateA;
+    Vector3 GateB;
+    Vector3 GateC;
+    Vector3 GateD;
+    Vector3 resetVector;
+    AudioSource audioSource;
+   [SerializeField] AudioClip audioGateA;
+   [SerializeField] AudioClip audioGateB;
+   [SerializeField] AudioClip audioGateC;
+   [SerializeField] AudioClip audioGateD;
+
 
 
     void Start(){
+            resetVector = new Vector3(20, 0, 0);
             score = GameObject.Find("Score");
             scoreManager = score.GetComponent<Score>();
             takeOffs = GameObject.Find("TakeOffs");
@@ -41,6 +53,11 @@ public class PlaneController : MonoBehaviour
             gameover.active = false;
             fire.active = false;
             redLight.active =false;
+            GateA = GameObject.Find("Gate A").transform.position;
+            GateB = GameObject.Find("Gate B").transform.position;
+            GateC = GameObject.Find("Gate C").transform.position;
+            GateD = GameObject.Find("Gate D").transform.position;
+            audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -72,7 +89,40 @@ public class PlaneController : MonoBehaviour
 
     public void GenerateDepartureWarning(){
         Debug.Log(transform.position);
-        warningInstance = Instantiate(warningPrefab, transform.position, transform.rotation);
-        warningInstance.transform.parent = gameObject.transform;
+        Transform childWarning = gameObject.transform.Find("Warning(Clone)");
+        if (!childWarning){
+            if (transform.position == GateA || transform.position == GateB){
+                warningInstance = Instantiate(warningPrefab, transform.position, transform.rotation* Quaternion.Euler (0f, 180f, 0f));
+                warningInstance.transform.parent = gameObject.transform;
+            }
+            else {
+                warningInstance = Instantiate(warningPrefab, transform.position, transform.rotation);
+                warningInstance.transform.parent = gameObject.transform;
+            }
+            
+        }
+        playWarningSound();
+    }
+
+    public void playWarningSound(){
+        if (!audioSource.isPlaying && transform.position == GateA){
+            Debug.Log("generae warning at gate A");
+            audioSource.PlayOneShot(audioGateA);
+        }
+        else if (!audioSource.isPlaying && transform.position == GateB){
+            Debug.Log("generae warning at gate B");
+            audioSource.PlayOneShot(audioGateB);
+        }
+        else if (!audioSource.isPlaying && transform.position == GateC){
+            Debug.Log("generae warning at gate C");
+            audioSource.PlayOneShot(audioGateC);
+        }
+        else if (!audioSource.isPlaying && transform.position == GateD){
+            Debug.Log("generae warning at gate D");
+            audioSource.PlayOneShot(audioGateD);
+        }     
     }
 }
+
+
+

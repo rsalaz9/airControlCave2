@@ -3632,6 +3632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 0}
+  takeOffsManager: {fileID: 0}
   warningPrefab: {fileID: 1000014137608800, guid: 59fc041619bbc494ca5363fce886311f,
     type: 3}
   warningInstance: {fileID: 0}
@@ -3639,6 +3640,10 @@ MonoBehaviour:
     type: 3}
   fire: {fileID: 6246827755049229022}
   redLight: {fileID: 0}
+  audioGateA: {fileID: 8300000, guid: eaee6c5cbfbe44e1394995313047edd3, type: 3}
+  audioGateB: {fileID: 8300000, guid: 3a60afc8ba9344aef888b6a843bc159e, type: 3}
+  audioGateC: {fileID: 8300000, guid: d11c04bcd1f804f3c990a120908cd50d, type: 3}
+  audioGateD: {fileID: 8300000, guid: d2f2eec9eeddd4c5f9633e875818d2ab, type: 3}
 --- !u!33 &6246827755204551903
 MeshFilter:
   m_ObjectHideFlags: 0
