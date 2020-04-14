@@ -87,8 +87,11 @@ public class PlaneController : MonoBehaviour
 
     public void GenerateDepartureWarning(){
         Debug.Log(transform.position);
-        warningInstance = Instantiate(warningPrefab, transform.position, transform.rotation);
-        warningInstance.transform.parent = gameObject.transform;
+        Transform childWarning = gameObject.transform.Find("Warning(Clone)");
+        if (!childWarning){
+            warningInstance = Instantiate(warningPrefab, transform.position, transform.rotation);
+            warningInstance.transform.parent = gameObject.transform;
+        }
         playWarningSound();
     }
 
