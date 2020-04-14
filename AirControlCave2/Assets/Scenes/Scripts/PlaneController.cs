@@ -20,6 +20,7 @@ public class PlaneController : MonoBehaviour
     Vector3 GateB;
     Vector3 GateC;
     Vector3 GateD;
+    Vector3 resetVector;
     AudioSource audioSource;
    [SerializeField] AudioClip audioGateA;
    [SerializeField] AudioClip audioGateB;
@@ -29,6 +30,7 @@ public class PlaneController : MonoBehaviour
 
 
     void Start(){
+            resetVector = new Vector3(20, 0, 0);
             score = GameObject.Find("Score");
             scoreManager = score.GetComponent<Score>();
             takeOffs = GameObject.Find("TakeOffs");
@@ -89,8 +91,15 @@ public class PlaneController : MonoBehaviour
         Debug.Log(transform.position);
         Transform childWarning = gameObject.transform.Find("Warning(Clone)");
         if (!childWarning){
-            warningInstance = Instantiate(warningPrefab, transform.position, transform.rotation);
-            warningInstance.transform.parent = gameObject.transform;
+            if (transform.position == GateA || transform.position == GateB){
+                warningInstance = Instantiate(warningPrefab, transform.position, transform.rotation* Quaternion.Euler (0f, 180f, 0f));
+                warningInstance.transform.parent = gameObject.transform;
+            }
+            else {
+                warningInstance = Instantiate(warningPrefab, transform.position, transform.rotation);
+                warningInstance.transform.parent = gameObject.transform;
+            }
+            
         }
         playWarningSound();
     }
