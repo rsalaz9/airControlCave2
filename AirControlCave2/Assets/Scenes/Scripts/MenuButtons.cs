@@ -6,11 +6,11 @@ public class MenuButtons : MonoBehaviour
 {
     // Start is called before the first frame update
     public void ButtonStart(){
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     public void ButtonOptions(){
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 
     public void ButtonExit(){
@@ -18,6 +18,15 @@ public class MenuButtons : MonoBehaviour
     }
 
     public void ButtonMenu(){
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
+
+    public void ButtonTutorial(){
+        SceneManager.LoadScene(3);
+    }
+
+    public void ButtonCredits(){
+        SceneManager.LoadScene(4);
+    }
+
 }
