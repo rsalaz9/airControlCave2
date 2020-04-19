@@ -411,22 +411,22 @@ PrefabInstance:
     - target: {fileID: 4423238998796777969, guid: 58642c09d1083cc408e356cbc59a9dac,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 229
+      value: 236
       objectReference: {fileID: 0}
     - target: {fileID: 4423238998796777969, guid: 58642c09d1083cc408e356cbc59a9dac,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 32
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 4423238998796777969, guid: 58642c09d1083cc408e356cbc59a9dac,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 26
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 4423238998796777969, guid: 58642c09d1083cc408e356cbc59a9dac,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4423238998796777969, guid: 58642c09d1083cc408e356cbc59a9dac,
         type: 3}
@@ -476,10 +476,10 @@ PrefabInstance:
     - target: {fileID: 4423238998796777969, guid: 58642c09d1083cc408e356cbc59a9dac,
         type: 3}
       propertyPath: m_text
-      value: "\n\n\nProduct Development:\nProgramming, Design, Art\n\nCarla Floricel\nNafiul
-        Nipu\nRuby Salazar\n\n\nSpecial Thanks \nMusic: Freesound, Soundbible, ClassicalMPR,
-        Classictvhits, Musicweeklies, \nAnimations: Mixamo\nTextures: Unity Asset
-        Store"
+      value: "\n\n\nProduct Development:\nProgramming, Design, Art\n\nCarla Floricel\nRuby
+        Salazar\nMd Nafiul Alam Nipu\n\nSpecial Thanks \nMusic: Freesound, Soundbible,
+        ClassicalMPR, Classictvhits, Musicweeklies, \nAnimations: Mixamo\nTextures:
+        Unity Asset Store"
       objectReference: {fileID: 0}
     - target: {fileID: 4423238998796777969, guid: 58642c09d1083cc408e356cbc59a9dac,
         type: 3}
