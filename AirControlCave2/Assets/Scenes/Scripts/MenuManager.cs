@@ -43,6 +43,7 @@ public class MenuManager : MonoBehaviour {
 
     public Vector3 angleOffset;
     public Vector3 distOffset = Vector3.forward;
+    Vector3 scale;
 
     public CAVE2.Button selectButton = CAVE2.Button.Button2;
 
@@ -72,7 +73,7 @@ public class MenuManager : MonoBehaviour {
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.volume = 0.25f;
         }
-        
+        scale = new Vector3(0.5f, 0.5f, 0f);
     }
 	
 	// Update is called once per frame
@@ -129,6 +130,7 @@ public class MenuManager : MonoBehaviour {
         {
             transform.position = Vector3.zero + Quaternion.Euler(angleOffset) * distOffset;
             transform.eulerAngles = angleOffset;
+            transform.localScale = scale;
         }
     }
 }
