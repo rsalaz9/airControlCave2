@@ -21,6 +21,7 @@ public class PlaneTrackerManager : MonoBehaviour
     private float nextActionTime = 0f;
     public float nextActionTimeGen = 10f;
     float period = 30f;
+    int whichRun;
     float periodgen = 40f;
     public float currentTime;
     public int PlanesAtGateCount =0;
@@ -110,7 +111,8 @@ public class PlaneTrackerManager : MonoBehaviour
 
     void ChooseRunwayToLand(){
         GameObject planeAir;
-        if (Random.value >=0.5){
+        whichRun = random.Next(0, 2);
+        if (whichRun > 0){
             Debug.Log("make one plane land at B");
             planeAir = Instantiate(PlaneAtAir, AirPositionB, PlaneAtAir.transform.rotation);
             planeAir.GetComponent<PathGeneratorForLand>().landB = true;
