@@ -607,9 +607,9 @@ MonoBehaviour:
   currentMenu: {fileID: 0}
   openMenus: 0
   showMenuSpeed: 5
-  followWand: 0
+  followWand: 1
   angleOffset: {x: 0, y: 0, z: 0}
-  distOffset: {x: 0, y: 0, z: 1}
+  distOffset: {x: 0, y: 1.43, z: 3.24}
   selectButton: 1
   openMenuSound: {fileID: 8300000, guid: c8ad541afbe776a4f8e27e498356f978, type: 3}
   closeMenuSound: {fileID: 0}
