@@ -36743,7 +36743,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -36846,6 +36846,10 @@ MonoBehaviour:
   gameover: {fileID: 0}
   fire: {fileID: 3398368619302696886}
   redLight: {fileID: 0}
+  audioGateA: {fileID: 0}
+  audioGateB: {fileID: 0}
+  audioGateC: {fileID: 0}
+  audioGateD: {fileID: 0}
 --- !u!1 &3398368621222065178
 GameObject:
   m_ObjectHideFlags: 0

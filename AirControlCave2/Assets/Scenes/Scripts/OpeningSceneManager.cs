@@ -7,7 +7,7 @@ public class OpeningSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("EnterMainMenu", 15f);
+        Invoke("EnterMainMenu", 10f);
     }
 
     public void EnterMainMenu(){
